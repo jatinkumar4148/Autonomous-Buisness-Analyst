@@ -1,0 +1,178 @@
+============================================================
+BUSINESS KNOWLEDGE BASE — AUTONOMOUS BUSINESS ANALYST AI
+============================================================
+
+--- MARKET RESEARCH KNOWLEDGE ---
+
+Market research is the process of gathering information about
+a target market, customers, and competitors to make informed
+business decisions. Key components include:
+
+1. Market Size Analysis: Total addressable market (TAM),
+   serviceable addressable market (SAM), and serviceable
+   obtainable market (SOM).
+
+2. Customer Segmentation: Dividing potential customers by
+   demographics (age, income, location), psychographics
+   (lifestyle, values), and behavior (buying patterns).
+
+3. Industry Trends: Analyzing growth rates, emerging
+   technologies, regulatory changes, and shifting consumer
+   preferences.
+
+4. Demand Analysis: Estimating how many people need your
+   product/service and how often they will buy.
+
+For food & beverage businesses:
+- The global coffee shop market is worth over $200 billion
+- India's cafe market grows at 11% CAGR annually
+- Target demographics: students, young professionals, remote workers
+- Peak hours: 7-10am and 12-2pm on weekdays
+- Average customer spends Rs. 200-500 per visit in India
+
+For retail businesses:
+- E-commerce integration is now essential even for physical stores
+- Customer loyalty programs increase retention by 30-40%
+- Local SEO drives 78% of mobile searches to offline purchases
+
+--- COMPETITOR ANALYSIS KNOWLEDGE ---
+
+Competitor analysis involves identifying direct and indirect
+competitors and analyzing their strengths, weaknesses,
+opportunities, and threats (SWOT).
+
+Types of competitors:
+1. Direct competitors: Same product, same market
+2. Indirect competitors: Different product, same need
+3. Potential competitors: Not yet competing but could enter
+
+SWOT Framework:
+- Strengths: What they do well (quality, price, location)
+- Weaknesses: Where they fall short (slow service, high prices)
+- Opportunities: Market gaps they haven't filled
+- Threats: External factors affecting them
+
+Porter's Five Forces for competitive analysis:
+1. Threat of new entrants
+2. Bargaining power of suppliers
+3. Bargaining power of buyers
+4. Threat of substitute products
+5. Competitive rivalry
+
+For coffee shop industry:
+- Major chains: Starbucks, Cafe Coffee Day, Barista, Blue Tokai
+- Independent cafes compete on: ambiance, specialty coffee, loyalty
+- Differentiation strategies: specialty brews, food menu, coworking space
+- Pricing benchmark: Rs. 150-400 for coffee drinks in urban India
+
+--- FINANCIAL PLANNING KNOWLEDGE ---
+
+A business financial plan includes startup costs, operating
+expenses, revenue projections, and break-even analysis.
+
+Startup Costs (one-time):
+- Lease deposit: 3-6 months rent upfront
+- Interior setup and furniture
+- Equipment purchase
+- Initial inventory
+- Legal and registration fees
+- Marketing and branding
+
+Operating Expenses (monthly):
+- Rent: 15-20% of expected revenue
+- Staff salaries: 25-30% of revenue
+- Raw materials/COGS: 30-35% of revenue
+- Utilities: 3-5% of revenue
+- Marketing: 5-10% of revenue
+
+Key Financial Metrics:
+- Gross Margin = (Revenue - COGS) / Revenue
+- Break-even point = Fixed Costs / Gross Margin %
+- ROI = (Net Profit / Investment) x 100
+- Payback period = Total Investment / Monthly Net Profit
+
+For a coffee shop in India (medium size, 500 sq ft):
+- Setup cost: Rs. 10-25 lakhs
+- Monthly operating cost: Rs. 2-4 lakhs
+- Average monthly revenue (stable): Rs. 4-8 lakhs
+- Break-even: typically 18-24 months
+- Net profit margin: 10-20% after stabilization
+
+--- RISK ANALYSIS KNOWLEDGE ---
+
+Business risk analysis identifies potential threats and
+creates mitigation strategies.
+
+Common Risk Categories:
+1. Financial Risk: Running out of cash, unexpected costs
+2. Market Risk: Low demand, wrong target audience
+3. Operational Risk: Staff issues, supply chain problems
+4. Regulatory Risk: Licenses, health inspections, compliance
+5. Competitive Risk: New competitors, price wars
+6. Reputational Risk: Bad reviews, social media crises
+
+Risk Assessment Matrix:
+- Likelihood (1-5) x Impact (1-5) = Risk Score
+- High (15-25): Immediate action needed
+- Medium (8-14): Monitor and plan
+- Low (1-7): Accept and watch
+
+Mitigation Strategies:
+- Financial: Maintain 3-6 month emergency fund
+- Market: Validate idea before investing (pilot testing)
+- Operational: Document processes, cross-train staff
+- Regulatory: Hire a local consultant for compliance
+- Competitive: Build strong brand loyalty
+
+For food businesses specifically:
+- FSSAI license is mandatory in India
+- Fire NOC and municipal licenses required
+- Health inspections can shut business temporarily
+- Food safety training for all staff is essential
+
+--- MARKETING STRATEGY KNOWLEDGE ---
+
+A marketing strategy defines how you reach and convert
+your target customers into paying, loyal customers.
+
+Marketing Channels:
+1. Digital Marketing:
+   - Social media (Instagram, Facebook, YouTube)
+   - Google My Business for local discovery
+   - WhatsApp marketing for repeat customers
+   - Email newsletters
+
+2. Local/Offline Marketing:
+   - Flyers and posters in nearby areas
+   - Partnerships with offices, colleges, gyms
+   - Local newspaper and radio ads
+   - Events and pop-ups
+
+3. Content Marketing:
+   - Food photography for Instagram
+   - Behind-the-scenes videos
+   - Customer testimonials and reviews
+   - Blog posts about specialty coffee/products
+
+Key Marketing Metrics:
+- Customer Acquisition Cost (CAC)
+- Customer Lifetime Value (CLV)
+- Return on Ad Spend (ROAS)
+- Net Promoter Score (NPS)
+
+Marketing Strategy for Food & Beverage:
+- Instagram reels showing coffee making = highest engagement
+- Google Maps reviews critical — aim for 4.5+ stars
+- Loyalty cards increase repeat visits by 35%
+- First-visit offers (buy 1 get 1) bring in new customers
+- Tie-ups with Zomato/Swiggy for delivery revenue stream
+
+For General Business Launch:
+- Pre-launch: Build social media 30 days before opening
+- Launch week: Offer discounts, invite local influencers
+- Month 1-3: Focus on reviews and word-of-mouth
+- Month 4+: Paid ads once you have proof of concept
+
+============================================================
+END OF KNOWLEDGE BASE
+============================================================

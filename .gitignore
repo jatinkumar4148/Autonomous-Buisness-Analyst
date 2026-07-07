@@ -1,0 +1,30 @@
+# Environment variables — NEVER commit this
+.env
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# Virtual environment
+venv/
+env/
+.venv/
+
+# Generated outputs
+outputs/
+
+# FAISS index cache (if saved to disk)
+*.faiss
+*.pkl
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+
+# OS files
+.DS_Store
+Thumbs.db
