@@ -379,6 +379,21 @@ header[data-testid="stHeader"] {{
     background: transparent !important;
     border: none !important;
     box-shadow: none !important;
+
+    height: 0 !important;
+    min-height: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}}
+
+/* Remove the top spacing reserved by Streamlit's header */
+[data-testid="stAppViewContainer"] {{
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+}}
+
+[data-testid="stAppViewBlockContainer"] {{
+    padding-top: 0 !important;
 }}
 
 /* Streamlit button */
