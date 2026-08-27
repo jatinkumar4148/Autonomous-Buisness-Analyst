@@ -108,8 +108,52 @@ footer {{
     visibility: hidden;
 }}
 
+/* Keep Streamlit's native sidebar open/close control available.
+   The header itself must remain visible; otherwise the reopen control
+   disappears after the sidebar is collapsed. */
 header {{
-    visibility: hidden;
+    visibility: visible !important;
+    background: transparent !important;
+}}
+
+/* Hide the normal Streamlit toolbar/menu while keeping sidebar controls visible. */
+#MainMenu {{
+    visibility: hidden !important;
+}}
+
+header [data-testid="stToolbar"] {{
+    visibility: hidden !important;
+}}
+
+header [data-testid="stDecoration"] {{
+    visibility: hidden !important;
+}}
+
+header [data-testid="stStatusWidget"] {{
+    visibility: hidden !important;
+}}
+
+/* Sidebar collapse button when sidebar is OPEN */
+button[data-testid="stSidebarCollapseButton"] {{
+    visibility: visible !important;
+    display: flex !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+}}
+
+/* Sidebar open button when sidebar is COLLAPSED */
+[data-testid="stSidebarCollapsedControl"] {{
+    visibility: visible !important;
+    display: flex !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+    z-index: 999999 !important;
+}}
+
+[data-testid="stSidebarCollapsedControl"] button {{
+    visibility: visible !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
 }}
 
 /* =====================================================
