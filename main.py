@@ -353,6 +353,11 @@ div[data-testid="stButton"] > button {{
     font-size: 23px !important;
 }}
 
+.theme-button button {{
+    background: {CARD} !important;
+    color: {TEXT} !important;
+}}
+
 .theme-button button:hover {{
     transform: rotate(18deg) scale(1.08) !important;
     box-shadow:
@@ -623,12 +628,7 @@ textarea:focus {{
     font-size: 16px !important;
     font-weight: 700 !important;
     border-radius: 10px !important;
-    background: linear-gradient(
-        100deg,
-        #ff5b3f,
-        #ff3d66,
-        #f92357
-    ) !important;
+    background: #ff0000 !important;
     box-shadow:
         0 8px 22px rgba(255,68,83,.22) !important;
 }}
@@ -658,7 +658,7 @@ textarea:focus {{
 .generate-wrap button:hover {{
     transform: translateY(-2px) !important;
     box-shadow:
-        0 12px 30px rgba(255,68,83,.35) !important;
+         0 12px 30px rgba(255,0,0,.35) !important;
 }}
 
 .generate-wrap button:active {{
@@ -1151,6 +1151,12 @@ textarea:focus {{
 
 div[data-testid="stButton"] button:not([aria-label="Switch theme"]) {{
     color: #ffffff !important;
+}}
+
+div[data-testid="stButton"] button {{
+    background: #ff0000 !important;
+    color: #ffffff !important;
+    border: none !important;
 }}
 
 .hero {{
