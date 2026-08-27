@@ -101,28 +101,31 @@ html, body, [class*="css"] {{
 ===================================================== */
 
 #MainMenu {{
-    visibility: hidden;
+    visibility: hidden !important;
 }}
 
 footer {{
-    visibility: hidden;
+    visibility: hidden !important;
 }}
 
-/* Keep Streamlit's native sidebar open/close control available.
-   The header itself must remain visible; otherwise the reopen control
-   disappears after the sidebar is collapsed. */
+/*
+   IMPORTANT:
+   Do NOT hide the Streamlit header.
+   Streamlit places the sidebar collapse/open controls in the
+   header. Hiding the header makes the sidebar impossible to
+   reopen after collapsing.
+*/
 header {{
     visibility: visible !important;
+    display: block !important;
     background: transparent !important;
+    z-index: 999999 !important;
 }}
 
-/* Hide the normal Streamlit toolbar/menu while keeping sidebar controls visible. */
-#MainMenu {{
-    visibility: hidden !important;
-}}
-
+/* Hide only the toolbar contents, not the header itself. */
 header [data-testid="stToolbar"] {{
     visibility: hidden !important;
+    display: none !important;
 }}
 
 header [data-testid="stDecoration"] {{
@@ -133,27 +136,33 @@ header [data-testid="stStatusWidget"] {{
     visibility: hidden !important;
 }}
 
-/* Sidebar collapse button when sidebar is OPEN */
+/* Sidebar collapse button while the sidebar is open. */
 button[data-testid="stSidebarCollapseButton"] {{
     visibility: visible !important;
     display: flex !important;
     opacity: 1 !important;
     pointer-events: auto !important;
+    z-index: 1000000 !important;
 }}
 
-/* Sidebar open button when sidebar is COLLAPSED */
+/* Sidebar reopen control while the sidebar is collapsed. */
 [data-testid="stSidebarCollapsedControl"] {{
     visibility: visible !important;
     display: flex !important;
     opacity: 1 !important;
     pointer-events: auto !important;
-    z-index: 999999 !important;
+    position: fixed !important;
+    top: 0.75rem !important;
+    left: 0.75rem !important;
+    z-index: 1000000 !important;
 }}
 
 [data-testid="stSidebarCollapsedControl"] button {{
     visibility: visible !important;
+    display: flex !important;
     opacity: 1 !important;
     pointer-events: auto !important;
+    z-index: 1000001 !important;
 }}
 
 /* =====================================================
