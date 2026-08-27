@@ -358,42 +358,61 @@ section[data-testid="stSidebar"] > div {{
 }}
 
 /* =====================================================
-   HIDE STREAMLIT TOP TOOLBAR / HEADER ACTIONS
-   Keep the native sidebar open/close control working.
+   STREAMLIT TOP HEADER
 ===================================================== */
 
-/* Hide Share / Star / Edit / GitHub toolbar */
+/* Hide only the header actions/content. Do NOT collapse the header
+   itself because Streamlit's native sidebar controls depend on it. */
 div[data-testid="stToolbar"] {{
     display: none !important;
     visibility: hidden !important;
 }}
 
-/* Hide the small top decoration line */
 div[data-testid="stDecoration"] {{
     display: none !important;
+    visibility: hidden !important;
 }}
 
-/* Keep the Streamlit header itself available so the
-   native sidebar open/close control continues to work. */
 header[data-testid="stHeader"] {{
     background: transparent !important;
     border: none !important;
     box-shadow: none !important;
-
-    height: 0 !important;
-    min-height: 0 !important;
     padding: 0 !important;
     margin: 0 !important;
 }}
 
-/* Remove the top spacing reserved by Streamlit's header */
+/* Remove app content's extra top spacing without hiding the header. */
 [data-testid="stAppViewContainer"] {{
     margin-top: 0 !important;
-    padding-top: 0 !important;
 }}
 
 [data-testid="stAppViewBlockContainer"] {{
     padding-top: 0 !important;
+}}
+
+/* Native sidebar controls must remain visible and clickable. */
+button[data-testid="stSidebarCollapseButton"] {{
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+    z-index: 999999 !important;
+}}
+
+[data-testid="stSidebarCollapsedControl"] {{
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+    z-index: 999999 !important;
+}}
+
+[data-testid="stSidebarCollapsedControl"] button {{
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+    z-index: 1000000 !important;
 }}
 
 /* Streamlit button */
