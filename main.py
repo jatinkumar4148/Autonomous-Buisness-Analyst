@@ -630,7 +630,7 @@ textarea:focus {{
     border-radius: 10px !important;
     background: #000000 !important;
     box-shadow:
-        0 8px 22px rgba(255,68,83,.22) !important;
+        0 8px 22px rgba(0,0,0,.20) !important;
 }}
 
 .generate-wrap button:before {{
@@ -658,7 +658,7 @@ textarea:focus {{
 .generate-wrap button:hover {{
     transform: translateY(-2px) !important;
     box-shadow:
-         0 12px 30px rgba(255,0,0,.35) !important;
+         0 12px 30px rgba(0,0,0,.30) !important;
 }}
 
 .generate-wrap button:active {{
@@ -1138,23 +1138,40 @@ textarea:focus {{
     animation: downloadPulse 2s infinite;
 }}
 
-/* Final contrast and spacing corrections */
+/* Final button override - BLACK background + WHITE text */
 [data-testid="stDownloadButton"] button,
 [data-testid="stDownloadButton"] button p,
 [data-testid="stDownloadButton"] button span,
 .download-wrap button,
 .download-wrap button p {{
     color: #ffffff !important;
-    background: linear-gradient(100deg, #ff5b3f, #ff3d66, #f92357) !important;
+    background: #000000 !important;
     opacity: 1 !important;
+}}
+
+[data-testid="stDownloadButton"] button:hover,
+.download-wrap button:hover {{
+    color: #ffffff !important;
+    background: #111111 !important;
 }}
 
 div[data-testid="stButton"] button:not([aria-label="Switch theme"]) {{
     color: #ffffff !important;
+    background: #000000 !important;
+    border: none !important;
 }}
 
-div[data-testid="stButton"] button {{
-    background: #ff0000 !important;
+div[data-testid="stButton"] button:not([aria-label="Switch theme"]):hover {{
+    color: #ffffff !important;
+    background: #111111 !important;
+}}
+
+/* Keep Generate button black even if other button styles load later */
+.generate-wrap button,
+.generate-wrap button:hover,
+.generate-wrap button:focus,
+.generate-wrap button:active {{
+    background: #000000 !important;
     color: #ffffff !important;
     border: none !important;
 }}
