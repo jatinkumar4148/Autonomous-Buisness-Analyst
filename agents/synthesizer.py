@@ -13,7 +13,7 @@ expert reports and writes the final document.
 
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
-from utils.llm import get_llm
+from utils.llm import get_llm, invoke_with_retry
 
 
 def synthesize_business_plan(
@@ -96,14 +96,18 @@ Make it read like a professional document, not a list of separate reports."""
 
     chain = prompt | llm | output_parser
 
-    final_report = chain.invoke({
-        "business_idea": business_idea,
-        "market_research": market_research,
-        "competitor_analysis": competitor_analysis,
-        "financial_plan": financial_plan,
-        "risk_analysis": risk_analysis,
-        "marketing_strategy": marketing_strategy,
-    })
+    final_report = invoke_with_retry(
+        chain,
+        {
+            "business_idea": business_idea,
+            "market_research": market_research,
+            "competitor_analysis": competitor_analysis,
+            "financial_plan": financial_plan,
+            "risk_analysis": risk_analysis,
+            "marketing_strategy": marketing_strategy,
+        },
+        "Synthesizer",
+    )
 
     print("✅ Final business plan ready!")
     return final_report

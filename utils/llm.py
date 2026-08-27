@@ -7,6 +7,7 @@ uses this to talk to Mistral AI.
 """
 
 import os
+import time
 from dotenv import load_dotenv
 from langchain_mistralai import ChatMistralAI, MistralAIEmbeddings
 
@@ -30,10 +31,29 @@ def get_llm(temperature: float = 0.3) -> ChatMistralAI:
         )
 
     return ChatMistralAI(
-        model="mistral-medium-latest",
+        model=os.getenv("MISTRAL_MODEL", "mistral-small-latest"),
         mistral_api_key=api_key,
         temperature=temperature,
     )
+
+
+def invoke_with_retry(chain, payload, operation: str):
+    """Retry transient Mistral rate-limit and availability responses."""
+    delays = (15, 30, 60, 90)
+    for attempt, delay in enumerate((0, *delays), start=1):
+        if delay:
+            print(f"⏳ {operation} temporarily unavailable; retrying in {delay} seconds...")
+            time.sleep(delay)
+        try:
+            return chain.invoke(payload)
+        except Exception as exc:
+            error_text = str(exc).lower()
+            is_transient = any(
+                marker in error_text
+                for marker in ("429", "502", "503", "504", "rate limit", "temporarily unavailable")
+            )
+            if not is_transient or attempt == len(delays) + 1:
+                raise
 
 
 def get_embeddings() -> MistralAIEmbeddings:

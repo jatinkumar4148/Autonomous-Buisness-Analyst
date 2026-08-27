@@ -170,6 +170,22 @@ python main.py
 
 Then type your business idea and get your complete business plan! 🎉
 
+## 🌐 Deploy as a Live Web App
+
+The browser version is in `app.py` and is ready for Streamlit Community Cloud.
+
+1. Push this repository to GitHub. Do not commit `.env`; it is already ignored.
+2. Open https://share.streamlit.io and sign in with GitHub.
+3. Select this repository and the `main` branch.
+4. Set **Main file path** to `app.py` and deploy.
+5. In the app settings, open **Secrets** and add:
+
+```toml
+MISTRAL_API_KEY = "your_mistral_api_key"
+```
+
+The live app will be available at the Streamlit URL shown after deployment. The first analysis can take several minutes because it builds the RAG index and runs all agents. For local browser testing, run `streamlit run app.py`.
+
 ---
 
 ## 📋 How to Use

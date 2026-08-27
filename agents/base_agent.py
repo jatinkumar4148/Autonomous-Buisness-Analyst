@@ -14,7 +14,7 @@ All 5 agents just customize their role and prompt.
 
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
-from utils.llm import get_llm
+from utils.llm import get_llm, invoke_with_retry
 from rag.retriever import retrieve_context
 
 
@@ -76,10 +76,14 @@ Be specific, practical, and tailored to this exact business idea."""
         chain = prompt | self.llm | self.output_parser
 
         # Step 4: Run and return
-        response = chain.invoke({
-            "business_idea": business_idea,
-            "rag_context": rag_context,
-        })
+        response = invoke_with_retry(
+            chain,
+            {
+                "business_idea": business_idea,
+                "rag_context": rag_context,
+            },
+            self.role,
+        )
 
         print(f"✅ {self.role} completed!")
         return response

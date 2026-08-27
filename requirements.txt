@@ -7,3 +7,4 @@ faiss-cpu>=1.7.4
 python-dotenv>=1.0.0
 mistralai>=1.0.0
 tiktoken>=0.7.0
+streamlit>=1.40.0
