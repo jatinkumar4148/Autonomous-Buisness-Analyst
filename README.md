@@ -1,140 +1,120 @@
-🤖 Autonomous Business Analyst AI
+# 🤖 Autonomous Business Analyst AI
 
 <p align="center">
-  <strong>Turn one business idea into a structured, professional business plan using a multi-agent AI workflow.</strong>
+  <strong>Turn one business idea into a professional, data-driven business plan using autonomous AI agents.</strong>
 </p>
 
 <p align="center">
   <a href="https://autonomous-buisness-analyst.streamlit.app/">
     <img src="https://img.shields.io/badge/🚀%20LIVE%20DEMO-Streamlit-FF4B4B?style=for-the-badge" alt="Live Demo">
   </a>
-  <img src="https://img.shields.io/badge/Python-3.9%2B-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python">
-  <img src="https://img.shields.io/badge/Mistral%20AI-LLM-111827?style=for-the-badge" alt="Mistral AI">
-  <img src="https://img.shields.io/badge/LangGraph-Workflow-16A34A?style=for-the-badge" alt="LangGraph">
-  <img src="https://img.shields.io/badge/RAG-FAISS-F59E0B?style=for-the-badge" alt="RAG FAISS">
+  <a href="https://github.com/jatinkumar4148/Autonomous-Buisness-Analyst">
+    <img src="https://img.shields.io/badge/GitHub-Repository-181717?style=for-the-badge&logo=github" alt="GitHub">
+  </a>
 </p>
 
 <p align="center">
-  <a href="https://github.com/jatinkumar4148/Autonomous-Buisness-Analyst">📦 GitHub Repository</a>
+  <a href="https://autonomous-buisness-analyst.streamlit.app/">🌐 Open Live Application</a>
   &nbsp; • &nbsp;
-  <a href="https://autonomous-buisness-analyst.streamlit.app/">🌐 Live Application</a>
+  <a href="https://github.com/jatinkumar4148/Autonomous-Buisness-Analyst">📦 View Source Code</a>
 </p>
 
-🌐 Live Demo
+---
 
-🚀 Try it yourself
+## 🚀 [Live Demo]([url](https://autonomous-buisness-analyst.streamlit.app/))
 
-Open Autonomous Business Analyst AI →
+### [Open Autonomous Business Analyst AI →](https://autonomous-buisness-analyst.streamlit.app/)
 
-Enter a business idea such as:
+Enter a simple idea such as:
 
-“I want to open a specialty coffee shop in Delhi for students and remote workers.”
+> **I want to open a coffee shop in Delhi**
 
-The application analyzes the idea across five specialist dimensions and generates a complete business plan.
+The system analyzes the idea through five specialized AI dimensions and produces a structured business plan.
 
-⚠️ Important: This tool produces AI-assisted estimates and recommendations. Validate market data, legal requirements, pricing, and financial projections with qualified local professionals before making business decisions.
+---
 
-✨ What is this?
+## ✨ About the Project
 
-Autonomous Business Analyst AI is a Streamlit-based multi-agent business analysis application that turns a business idea into a structured business plan using:
+**Autonomous Business Analyst AI** is a multi-agent AI application designed to transform a raw business idea into a structured business analysis and actionable business plan.
 
-🧠 Mistral AI for language generation and embeddings
+The application combines:
 
-🔗 LangChain for LLM/agent components
+- 🧠 Mistral AI
+- 🔗 LangChain
+- 🔄 LangGraph
+- 📚 RAG
+- ⚡ FAISS
+- 🎨 Streamlit
 
-🔄 LangGraph for workflow orchestration
+---
 
-📚 RAG + FAISS for knowledge-grounded responses
-
-📊 Five specialist AI agents for business analysis
-
-The five core areas are Market Research, Competitor Analysis, Financial Planning, Risk Analysis, and Marketing Strategy, followed by a final synthesis into one business plan.
-
-🧩 System Architecture
+# 🏗️ System Architecture
 
 <p align="center">
-  <img src="<img width="1672" height="940" alt="bb1ccf65-fe0e-4f22-a383-f4369adbcbd1" src="https://github.com/user-attachments/assets/0397de42-ded7-4897-8cda-2130e6e4e898" />
-" alt="Autonomous Business Analyst AI system architecture" width="100%">
+  <img src="./architecture.png" alt="Autonomous Business Analyst AI System Architecture" width="100%">
 </p>
 
-🔄 End-to-end flow
+### 🔄 Workflow
 
-Business Idea → RAG Knowledge Base → Five AI Agents → LangGraph Orchestrator → Synthesizer → Complete Business Plan
+**Business Idea → RAG Knowledge Base → Five Specialized AI Agents → LangGraph Orchestrator → Synthesizer → Complete Business Plan**
 
-The workflow stores each specialist result in shared LangGraph state and then combines those results into the final report.
+### What happens?
 
-🤖 Five Specialized AI Agents
+1. 💡 **Business Idea** — User provides the business concept.
+2. 📚 **RAG Knowledge Base** — Relevant business knowledge is retrieved.
+3. 🤖 **Five AI Agents** — The idea is analyzed from five different business perspectives.
+4. 🔄 **LangGraph Orchestrator** — Coordinates the agent workflow and shared state.
+5. 🧠 **Synthesizer** — Combines the individual analyses.
+6. 📄 **Complete Business Plan** — A final structured plan is generated.
+
+---
+
+# 🤖 Five AI Analysis Dimensions
 
 <p align="center">
-  <img src="<img width="1690" height="931" alt="d4939f05-73ae-44d3-94a3-76f13550f927" src="https://github.com/user-attachments/assets/f1789c97-5338-4abd-b0d7-aa36d5100c5d" />" alt="Five AI analysis dimensions" width="100%">
+  <img src="./analysis-dimensions.png" alt="Five AI Analysis Dimensions" width="100%">
 </p>
 
-#
+| # | AI Specialist | Main Focus |
+|---|---|---|
+| 🟢 01 | **Market Research** | Market size, demand, trends and target audience |
+| 🟠 02 | **Competitor Analysis** | Competitors, gaps, SWOT and differentiation |
+| 🟣 03 | **Financial Planning** | Costs, revenue, expenses and break-even |
+| 🔴 04 | **Risk Analysis** | Business risks, impact and mitigation |
+| 🔵 05 | **Marketing Strategy** | Positioning, channels, launch and growth |
 
-Specialist Agent
+---
 
-Focus
+# 📊 What the AI Generates
 
-01
+The final business plan can contain:
 
-📊 Market Research
+### 📌 Executive Summary
+Business concept, opportunity and overall direction.
 
-Target customers, demand, trends, market opportunity and entry timing
+### 📈 Market Opportunity
+Target customers, demand, trends and market potential.
 
-02
+### ⚔️ Competitive Landscape
+Competitor identification, strengths, gaps and differentiation.
 
-⚔️ Competitor Analysis
+### 💰 Financial Planning
+Startup costs, operating expenses, revenue assumptions and break-even considerations.
 
-Direct/indirect competitors, SWOT-style insights, pricing and differentiation
+### ⚠️ Risk Assessment
+Financial, market, operational and compliance risks with mitigation strategies.
 
-03
+### 📣 Marketing Strategy
+Positioning, marketing channels, launch activities and growth strategy.
 
-💰 Financial Planning
+### ✅ Recommended Next Steps
+Practical actions to move the business idea forward.
 
-Startup costs, operating expenses, revenue scenarios and break-even
+---
 
-04
+# 🧠 RAG Architecture
 
-🛡️ Risk Analysis
-
-Financial, market, operational, regulatory and legal risks
-
-05
-
-📣 Marketing Strategy
-
-Positioning, channels, launch activities, acquisition and retention
-
-🎯 Final Synthesis
-
-The Synthesizer combines the outputs from all five specialists into one coherent business plan.
-
-📋 What you get
-
-The dashboard can produce sections such as:
-
-📌 Executive summary
-
-🏢 Business overview
-
-📈 Market opportunity
-
-⚔️ Competitive landscape
-
-💰 Financial projections
-
-⚠️ Risk management
-
-🚀 Go-to-market strategy
-
-✅ Recommended next steps
-
-Generated reports are also saved locally in:
-
-outputs/business_plan_<business_idea>_<timestamp>.txt
-
-🧠 RAG Pipeline
-
+```text
 Business Knowledge
         ↓
 Document Loading
@@ -149,92 +129,71 @@ Semantic Retrieval
         ↓
 Relevant Context
         ↓
-Specialist AI Agents
+AI Agents
+```
 
-The local knowledge base is stored in:
+The RAG layer provides relevant knowledge to the specialist agents before they generate their analysis.
 
-data/business_knowledge.txt
+---
 
-Relevant retrieved context is added to agent prompts to make responses more knowledge-grounded.
+# 🔄 Multi-Agent Workflow
 
-🔄 Multi-Agent Workflow
+```text
+                    BUSINESS IDEA
+                         │
+                         ▼
+                  RAG KNOWLEDGE BASE
+                         │
+                         ▼
+              ┌───────────────────────┐
+              │  FIVE AI SPECIALISTS  │
+              └───────────────────────┘
+                 │    │    │    │    │
+                 ▼    ▼    ▼    ▼    ▼
+              Market Competitor Finance Risk Marketing
+                 │    │    │    │    │
+                 └────┴────┴────┴────┘
+                         │
+                         ▼
+                 LANGGRAPH ORCHESTRATOR
+                         │
+                         ▼
+                     SYNTHESIZER
+                         │
+                         ▼
+               COMPLETE BUSINESS PLAN
+```
 
-START
-  ↓
-Market Research
-  ↓
-Competitor Analysis
-  ↓
-Financial Planning
-  ↓
-Risk Analysis
-  ↓
-Marketing Strategy
-  ↓
-Synthesizer
-  ↓
-FINAL BUSINESS PLAN
+---
 
-LangGraph coordinates the workflow and shared state between the specialist agents.
+# 🛠️ Technology Stack
 
-🛠️ Technology Stack
+| Technology | Purpose |
+|---|---|
+| 🐍 Python | Core application |
+| 🎨 Streamlit | Interactive web interface |
+| 🧠 Mistral AI | LLM generation and embeddings |
+| 🔗 LangChain | AI/agent components |
+| 🔄 LangGraph | Workflow orchestration |
+| 📚 RAG | Knowledge-grounded generation |
+| ⚡ FAISS | Vector similarity search |
 
-Area
+---
 
-Technology
+# 📁 Project Structure
 
-🎨 User Interface
-
-Streamlit
-
-🧠 Language Model
-
-Mistral AI
-
-🔗 LLM / Agent Framework
-
-LangChain
-
-🔄 Workflow Orchestration
-
-LangGraph
-
-📚 Retrieval
-
-RAG + FAISS
-
-🧮 Embeddings
-
-Mistral Embeddings
-
-🐍 Language
-
-Python 3.9+
-
-📁 Project Structure
-
-autonomous_business_analyst/
+```text
+Autonomous-Buisness-Analyst/
 │
 ├── main.py
 ├── requirements.txt
 ├── .env.example
 ├── .gitignore
 ├── README.md
-│
-├── data/
-│   └── business_knowledge.txt
-│
-├── rag/
-│   ├── __init__.py
-│   ├── loader.py
-│   └── retriever.py
-│
-├── utils/
-│   ├── __init__.py
-│   └── llm.py
+├── architecture.png
+├── analysis-dimensions.png
 │
 ├── agents/
-│   ├── __init__.py
 │   ├── base_agent.py
 │   ├── market_research.py
 │   ├── competitor_analysis.py
@@ -244,181 +203,154 @@ autonomous_business_analyst/
 │   └── synthesizer.py
 │
 ├── graph/
-│   ├── __init__.py
 │   ├── state.py
 │   ├── nodes.py
 │   └── workflow.py
 │
+├── rag/
+│   ├── loader.py
+│   └── retriever.py
+│
+├── utils/
+│   └── llm.py
+│
+├── data/
+│   └── business_knowledge.txt
+│
 └── outputs/
+```
 
-🚀 Run Locally
+---
 
-1. Clone the repository
+# 🚀 Run Locally
 
+### 1. Clone
+
+```bash
 git clone https://github.com/jatinkumar4148/Autonomous-Buisness-Analyst.git
 cd Autonomous-Buisness-Analyst
+```
 
-2. Create a virtual environment
+### 2. Create virtual environment
 
-Windows PowerShell
+**Windows:**
 
+```powershell
 python -m venv venv
-.\venv\Scripts\Activate.ps1
+venv\Scripts\Activate.ps1
+```
 
-Windows CMD
+**macOS/Linux:**
 
-python -m venv venv
-venv\Scripts\activate
-
-macOS / Linux
-
+```bash
 python3 -m venv venv
 source venv/bin/activate
+```
 
-3. Install dependencies
+### 3. Install dependencies
 
-python -m pip install --upgrade pip
+```bash
 pip install -r requirements.txt
+```
 
-4. Configure Mistral API
+### 4. Configure API key
 
-Create a .env file in the project root:
+Create `.env`:
 
+```env
 MISTRAL_API_KEY=your_mistral_api_key_here
+```
 
-You can use .env.example as the template.
+### 5. Run
 
-Never commit .env or expose your API key in GitHub.
-
-5. Run Streamlit
-
+```bash
 streamlit run main.py
+```
 
 Then open:
 
+```text
 http://localhost:8501
+```
 
-💡 Good Input Examples
+---
 
-I want to open a specialty coffee shop in Delhi for students and remote workers.
+# 💡 Example Ideas
 
-I want to start an affordable online clothing store for urban Indian customers.
+```text
+I want to open a coffee shop in Delhi.
+```
 
-I want to launch a subscription-based fitness app for beginners in Mumbai.
+```text
+I want to start an online clothing business in Mumbai.
+```
 
-For better results, include the location, target customer, business model, budget, and differentiator when known.
+```text
+I want to launch a fitness subscription app for college students.
+```
 
-🔐 Security & Privacy
+For better results, provide details such as:
 
-Keep API keys inside .env.
+- Location
+- Target audience
+- Business model
+- Approximate budget
+- Product/service
+- Competitive advantage
 
-Do not hard-code API keys.
+---
 
-Do not commit .env.
+# 🔐 Environment Variables
 
-Do not upload confidential business plans or customer data.
-
-Business ideas and prompts are sent to Mistral for processing.
-
-Review provider privacy policies before using sensitive information.
-
-🧪 Development Checks
-
-Compile-check the project:
-
-python -m compileall main.py agents graph rag utils
-
-Run the application:
-
-streamlit run main.py
-
-🐛 Troubleshooting
-
-MISTRAL_API_KEY is missing
-
-Check that .env exists beside main.py and contains:
-
+```env
 MISTRAL_API_KEY=your_mistral_api_key_here
+```
 
-Restart Streamlit after changing environment variables.
+⚠️ **Never commit your `.env` file or expose your API key publicly.**
 
-ModuleNotFoundError
+---
 
-python -m pip install -r requirements.txt
+# 🔧 Customization
 
-FAISS / embedding errors
+You can customize the project by:
 
-Check that dependencies installed correctly and that the machine has internet access for the initial embedding request.
+- Adding new AI agents
+- Updating the RAG knowledge base
+- Modifying agent prompts
+- Changing the LangGraph workflow
+- Adding new business-analysis dimensions
+- Improving financial calculations
+- Adding additional export formats
 
-Analysis is slow
+---
 
-The first run may build the vector store. Each analysis also makes multiple model calls and a final synthesis call.
+# 📈 Future Enhancements
 
-Results are too generic
+- 🌐 Real-time web market research
+- 📊 Live competitor pricing
+- 💹 Advanced financial forecasting
+- 📄 PDF/DOCX report export
+- 🧪 Automated testing
+- 🗃️ Industry-specific RAG
+- ➕ Additional specialist agents
+- ☁️ Production monitoring
 
-Use a more specific business idea, improve the local knowledge base, and refine the relevant specialist prompt.
+---
 
-🔧 Customization
+# ⚠️ Disclaimer
 
-Update the knowledge base
+This application provides AI-assisted business analysis for planning and educational purposes. Generated information may be incomplete, inaccurate, or outdated. Financial, legal, tax, regulatory and investment decisions should be independently validated with qualified professionals.
 
-Edit:
-
-data/business_knowledge.txt
-
-Change agent behavior
-
-Edit the specialist prompts and role definitions under:
-
-agents/
-
-Change workflow
-
-Update:
-
-graph/nodes.py
-graph/workflow.py
-
-Change model configuration
-
-Update:
-
-utils/llm.py
-
-📈 Future Improvements
-
-Potential extensions include:
-
-🌐 Web-based market research
-
-📊 Real-time competitor pricing
-
-💹 More detailed financial modeling
-
-📄 PDF / DOCX export
-
-🧪 Automated tests
-
-➕ Additional specialist agents
-
-🗃️ Industry-specific RAG knowledge bases
-
-☁️ Production deployment and monitoring
-
-📜 License
-
-No license file is currently included in the repository. Add an explicit license before distributing the project or accepting external contributions.
-
-⚠️ Disclaimer
-
-This project is for research, planning, and educational use. AI-generated content can be incomplete, inaccurate, or outdated. It is not financial, legal, tax, investment, or professional business advice.
+---
 
 <p align="center">
-  <strong>Built with 🤖 Mistral AI • 🔗 LangChain • 🔄 LangGraph • 📚 RAG + FAISS</strong>
-</p>
 
-<p align="center">
-  <a href="https://autonomous-buisness-analyst.streamlit.app/">🚀 Live Demo</a>
-  &nbsp; • &nbsp;
-  <a href="https://github.com/jatinkumar4148/Autonomous-Buisness-Analyst">⭐ GitHub</a>
+### 🤖 Built with Mistral AI + LangChain + LangGraph + RAG + FAISS
+
+<br>
+
+<a href="https://autonomous-buisness-analyst.streamlit.app/">
+  🚀 <strong>Try the Live App</strong>
+</a>
+
 </p>
