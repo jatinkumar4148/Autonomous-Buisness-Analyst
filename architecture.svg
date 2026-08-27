@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="700" viewBox="0 0 1400 700">
+  <defs>
+    <linearGradient id="g" x1="0" x2="1">
+      <stop offset="0" stop-color="#022" />
+      <stop offset="1" stop-color="#064" />
+    </linearGradient>
+    <style>
+      .bg{fill:url(#g)}
+      .title{font: bold 38px sans-serif; fill:#bff}
+      .box{fill:rgba(255,255,255,0.03);stroke:#2a6;stroke-width:2}
+      .label{font: 20px sans-serif; fill:#9fe}
+      .icon{fill:#2a6}
+    </style>
+  </defs>
+  <rect width="100%" height="100%" class="bg"/>
+  <text x="50%" y="60" text-anchor="middle" class="title">Autonomous Business Analyst AI — System Architecture</text>
+
+  <!-- RAG box -->
+  <rect x="60" y="120" rx="12" ry="12" width="300" height="160" class="box"/>
+  <text x="210" y="160" text-anchor="middle" class="label">RAG Knowledge Base</text>
+  <text x="210" y="190" text-anchor="middle" class="label">Documents → Embeddings → FAISS</text>
+
+  <!-- Five agents -->
+  <rect x="420" y="80" rx="12" ry="12" width="860" height="240" class="box"/>
+  <text x="850" y="110" text-anchor="middle" class="label">Five Specialized AI Agents</text>
+  <text x="850" y="140" text-anchor="middle" class="label">Market • Competitor • Finance • Risk • Marketing</text>
+
+  <!-- Orchestrator -->
+  <rect x="420" y="360" rx="12" ry="12" width="400" height="120" class="box"/>
+  <text x="620" y="390" text-anchor="middle" class="label">LangGraph Orchestrator</text>
+  <text x="620" y="420" text-anchor="middle" class="label">State & Workflow</text>
+
+  <!-- Synthesizer -->
+  <rect x="920" y="360" rx="12" ry="12" width="360" height="120" class="box"/>
+  <text x="1100" y="390" text-anchor="middle" class="label">Synthesizer</text>
+  <text x="1100" y="420" text-anchor="middle" class="label">Combine & Validate Outputs</text>
+
+  <!-- Arrows -->
+  <line x1="360" y1="200" x2="420" y2="200" stroke="#8ff" stroke-width="3" marker-end="url(#arrow)"/>
+  <line x1="820" y1="420" x2="920" y2="420" stroke="#8ff" stroke-width="3" marker-end="url(#arrow)"/>
+  <line x1="1320" y1="420" x2="1250" y2="480" stroke="#8ff" stroke-width="3" marker-end="url(#arrow)"/>
+
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L6,3 L0,6 z" fill="#8ff" />
+    </marker>
+  </defs>
+
+  <!-- Complete plan -->
+  <rect x="480" y="520" rx="12" ry="12" width="520" height="120" class="box"/>
+  <text x="740" y="560" text-anchor="middle" class="label">Complete Business Plan</text>
+  <text x="740" y="590" text-anchor="middle" class="label">Executive Summary • Market • Finance • Risk • Marketing</text>
+
+</svg>

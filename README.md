@@ -51,7 +51,7 @@ The application combines:
 # 🏗️ System Architecture
 
 <p align="center">
-  <img src="./architecture.png" alt="Autonomous Business Analyst AI System Architecture" width="100%">
+  <img src="./architecture.svg" alt="Autonomous Business Analyst AI System Architecture" width="100%">
 </p>
 
 ### 🔄 Workflow
@@ -72,7 +72,7 @@ The application combines:
 # 🤖 Five AI Analysis Dimensions
 
 <p align="center">
-  <img src="./analysis-dimensions.png" alt="Five AI Analysis Dimensions" width="100%">
+  <img src="./analysis-dimensions.svg" alt="Five AI Analysis Dimensions" width="100%">
 </p>
 
 | # | AI Specialist | Main Focus |
@@ -190,8 +190,8 @@ Autonomous-Buisness-Analyst/
 ├── .env.example
 ├── .gitignore
 ├── README.md
-├── architecture.png
-├── analysis-dimensions.png
+├── architecture.svg
+├── analysis-dimensions.svg
 │
 ├── agents/
 │   ├── base_agent.py
@@ -339,7 +339,7 @@ You can customize the project by:
 
 # ⚠️ Disclaimer
 
-This application provides AI-assisted business analysis for planning and educational purposes. Generated information may be incomplete, inaccurate, or outdated. Financial, legal, tax, regulatory and investment decisions should be independently validated with qualified professionals.
+This application provides AI-assisted business analysis for planning and educational purposes. Generated information may be incomplete, inaccurate, or outdated. Financial, legal, tax, regulatory [...]
 
 ---
 
