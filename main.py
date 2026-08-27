@@ -1540,8 +1540,6 @@ st.html(
 # BUSINESS INPUT
 # =========================================================
 
-st.markdown('<div class="workspace">', unsafe_allow_html=True)
-
 st.html(
     textwrap.dedent("""
     <div class="workspace-title">
@@ -1580,9 +1578,6 @@ generate = st.button(
     key="generate",
     use_container_width=True
 )
-
-st.markdown('</div>', unsafe_allow_html=True)
-st.markdown('</div>', unsafe_allow_html=True)
 
 # =========================================================
 # GENERATE BUTTON ACTION
