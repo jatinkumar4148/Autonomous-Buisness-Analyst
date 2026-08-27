@@ -76,8 +76,11 @@ The application combines:
 # 🤖 Five AI Analysis Dimensions
 
 <p align="center">
-  <img src="<img width="1690" height="931" alt="Five AI Analysis Dimensions" src="https://github.com/user-attachments/assets/aa834180-6f0c-48a3-a84d-c7ce9a3ec8fb" />
-" alt="Five AI Analysis Dimensions" width="100%">
+  <img
+    src="https://github.com/user-attachments/assets/aa834180-6f0c-48a3-a84d-c7ce9a3ec8fb"
+    alt="Five AI Analysis Dimensions"
+    width="100%"
+  />
 </p>
 
 | # | AI Specialist | Main Focus |
