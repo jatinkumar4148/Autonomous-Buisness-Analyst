@@ -579,18 +579,12 @@ textarea:focus {{
     width: 100% !important;
     height: 54px !important;
     border: none !important;
-    color: white !important;
+    color: #ffffff !important;
     font-size: 16px !important;
     font-weight: 700 !important;
     border-radius: 10px !important;
-    background: linear-gradient(
-        100deg,
-        #ff5b3f,
-        #ff3d66,
-        #f92357
-    ) !important;
-    box-shadow:
-        0 8px 22px rgba(255,68,83,.22) !important;
+    background: #000000 !important;
+    box-shadow: 0 8px 22px rgba(0,0,0,.3) !important;
 }}
 
 .generate-wrap button:before {{
@@ -603,7 +597,7 @@ textarea:focus {{
     background: linear-gradient(
         90deg,
         transparent,
-        rgba(255,255,255,.35),
+        rgba(255,255,255,.2),
         transparent
     );
     transform: skewX(-20deg);
@@ -617,8 +611,8 @@ textarea:focus {{
 
 .generate-wrap button:hover {{
     transform: translateY(-2px) !important;
-    box-shadow:
-        0 12px 30px rgba(255,68,83,.35) !important;
+    background: #1a1a1a !important;
+    box-shadow: 0 12px 30px rgba(0,0,0,.45) !important;
 }}
 
 .generate-wrap button:active {{
@@ -1105,7 +1099,7 @@ textarea:focus {{
 .download-wrap button,
 .download-wrap button p {{
     color: #ffffff !important;
-    background: linear-gradient(100deg, #ff5b3f, #ff3d66, #f92357) !important;
+    background: #000000 !important;
     opacity: 1 !important;
 }}
 
