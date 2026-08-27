@@ -506,17 +506,21 @@ div[data-testid="stButton"] > button {{
 }}
 
 @keyframes cardIn {{
+
     from {{
         opacity: 0;
         transform: translateY(20px);
     }}
+
     to {{
         opacity: 1;
         transform: translateY(0);
     }}
+
 }}
 
 .workspace-title {{
+
     display: flex;
     align-items: center;
     gap: 12px;
@@ -524,44 +528,80 @@ div[data-testid="stButton"] > button {{
     font-weight: 700;
     color: {TEXT};
     margin-bottom: 12px;
+
 }}
 
 .bulb {{
+
     width: 30px;
     height: 30px;
     border-radius: 50%;
+
     display: flex;
     align-items: center;
     justify-content: center;
+
     background: #fff8e8;
     color: #f4a900;
+
     box-shadow: 0 0 20px rgba(255,180,30,.15);
+
 }}
 
 textarea {{
+
     border-radius: 10px !important;
     border: 1px solid #b9a8ff !important;
+
     background: {INPUT} !important;
     color: {TEXT} !important;
+
     min-height: 90px !important;
+
     transition: all .3s ease !important;
+
 }}
 
 textarea:focus {{
+
     border-color: #ff766a !important;
+
     box-shadow:
         0 0 0 3px rgba(255,91,78,.08),
         0 0 25px rgba(255,91,78,.08) !important;
+
 }}
 
+/* =====================================================
+   CHARACTER COUNTER
+===================================================== */
+
 .char-counter {{
+
+    width: 100%;
+
     text-align: right;
+
     color: {MUTED};
+
     font-size: 11px;
-    margin-top: -27px;
-    margin-right: 14px;
-    position: relative;
-    z-index: 5;
+
+    line-height: 16px;
+
+    margin-top: 4px;
+    margin-right: 0;
+    margin-bottom: 8px;
+
+    padding: 0 4px;
+
+    box-sizing: border-box;
+
+    position: static !important;
+
+    z-index: auto !important;
+
+    background: transparent !important;
+
 }}
 
 /* =====================================================
@@ -1404,6 +1444,10 @@ st.html(
 # BUSINESS INPUT
 # =========================================================
 
+# =========================================================
+# BUSINESS INPUT
+# =========================================================
+
 st.markdown('<div class="workspace">', unsafe_allow_html=True)
 
 st.html(
@@ -1412,12 +1456,25 @@ st.html(
         <span class="bulb">♧</span>
         <span>What are you building?</span>
     </div>
-    """),
+    """)
+)
+
+# Make placeholder clearly visible
+st.markdown(
+    """
+    <style>
+    textarea::placeholder {
+        color: #6b7280 !important;
+        opacity: 1 !important;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
 )
 
 idea = st.text_area(
     "",
-    value="I want to open a coffee shop in delhi",
+    placeholder="I want to open a coffee shop in Delhi",
     height=90,
     max_chars=500,
     key="business_idea",
@@ -1433,7 +1490,7 @@ st.html(
         &nbsp;&nbsp;
         <span style="color:#159d50;font-size:18px;">✓</span>
     </div>
-    """),
+    """)
 )
 
 st.markdown('<div class="generate-wrap">', unsafe_allow_html=True)
