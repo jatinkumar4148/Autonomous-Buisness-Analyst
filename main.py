@@ -624,11 +624,11 @@ textarea:focus {{
     width: 100% !important;
     height: 54px !important;
     border: none !important;
-    color: white !important;
+    color: #ffffff !important;
     font-size: 16px !important;
     font-weight: 700 !important;
     border-radius: 10px !important;
-    background: #ff0000 !important;
+    background: #000000 !important;
     box-shadow:
         0 8px 22px rgba(255,68,83,.22) !important;
 }}
