@@ -136,32 +136,13 @@ The RAG layer provides relevant knowledge to the specialist agents before they g
 
 # 🔄 Multi-Agent Workflow
 
-```text
-                    BUSINESS IDEA
-                         │
-                         ▼
-                  RAG KNOWLEDGE BASE
-                         │
-                         ▼
-              ┌───────────────────────┐
-              │  FIVE AI SPECIALISTS  │
-              └───────────────────────┘
-                 │    │    │    │    │
-                 ▼    ▼    ▼    ▼    ▼
-              Market Competitor Finance Risk Marketing
-                 │    │    │    │    │
-                 └────┴────┴────┴────┘
-                         │
-                         ▼
-                 LANGGRAPH ORCHESTRATOR
-                         │
-                         ▼
-                     SYNTHESIZER
-                         │
-                         ▼
-               COMPLETE BUSINESS PLAN
-```
-
+<p align="center">
+  <img
+    src="https://github.com/user-attachments/assets/1b0b041c-5744-4888-830e-0848488e72da" />"
+    alt="RAG Pipeline and AI Agents"
+    width="100%"
+  />
+</p>
 ---
 
 # 🛠️ Technology Stack
