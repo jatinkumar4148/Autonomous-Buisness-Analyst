@@ -53,7 +53,8 @@ The five core areas are Market Research, Competitor Analysis, Financial Planning
 🧩 System Architecture
 
 <p align="center">
-  <img src="architecture.png" alt="Autonomous Business Analyst AI system architecture" width="100%">
+  <img src="<img width="1672" height="940" alt="bb1ccf65-fe0e-4f22-a383-f4369adbcbd1" src="https://github.com/user-attachments/assets/0397de42-ded7-4897-8cda-2130e6e4e898" />
+" alt="Autonomous Business Analyst AI system architecture" width="100%">
 </p>
 
 🔄 End-to-end flow
@@ -65,7 +66,7 @@ The workflow stores each specialist result in shared LangGraph state and then co
 🤖 Five Specialized AI Agents
 
 <p align="center">
-  <img src="analysis-dimensions.png" alt="Five AI analysis dimensions" width="100%">
+  <img src="<img width="1690" height="931" alt="d4939f05-73ae-44d3-94a3-76f13550f927" src="https://github.com/user-attachments/assets/f1789c97-5338-4abd-b0d7-aa36d5100c5d" />" alt="Five AI analysis dimensions" width="100%">
 </p>
 
 #
