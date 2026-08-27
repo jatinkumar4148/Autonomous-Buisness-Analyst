@@ -122,23 +122,13 @@ Practical actions to move the business idea forward.
 
 # 🧠 RAG Architecture
 
-```text
-Business Knowledge
-        ↓
-Document Loading
-        ↓
-Text Chunking
-        ↓
-Mistral Embeddings
-        ↓
-FAISS Vector Store
-        ↓
-Semantic Retrieval
-        ↓
-Relevant Context
-        ↓
-AI Agents
-```
+<p align="center">
+  <img
+    src="https://github.com/user-attachments/assets/cdd3d99d-5c34-4377-8680-6525c7266140"
+    alt="Autonomous Business Analyst AI System Architecture"
+    width="100%"
+  />
+</p>
 
 The RAG layer provides relevant knowledge to the specialist agents before they generate their analysis.
 
