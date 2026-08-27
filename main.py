@@ -108,31 +108,6 @@ footer {{
     visibility: hidden;
 }}
 
-/* Keep Streamlit's native sidebar open/close controls working.
-   Do NOT change the sidebar colors or layout. */
-header {{
-    visibility: visible !important;
-}}
-
-[data-testid="stSidebarCollapsedControl"] {{
-    visibility: visible !important;
-    display: flex !important;
-    opacity: 1 !important;
-    pointer-events: auto !important;
-    z-index: 999999 !important;
-}}
-
-[data-testid="stSidebarCollapsedControl"] button {{
-    visibility: visible !important;
-    pointer-events: auto !important;
-}}
-
-button[data-testid="stSidebarCollapseButton"] {{
-    visibility: visible !important;
-    pointer-events: auto !important;
-    z-index: 999999 !important;
-}}
-
 /* =====================================================
    SIDEBAR
 ===================================================== */
@@ -358,22 +333,16 @@ section[data-testid="stSidebar"] > div {{
 }}
 
 /* =====================================================
-   STREAMLIT TOP HEADER
+   STREAMLIT HEADER + SIDEBAR OPEN/CLOSE
 ===================================================== */
 
-/* Hide only the header actions/content. Do NOT collapse the header
-   itself because Streamlit's native sidebar controls depend on it. */
-div[data-testid="stToolbar"] {{
-    display: none !important;
-    visibility: hidden !important;
-}}
-
-div[data-testid="stDecoration"] {{
-    display: none !important;
-    visibility: hidden !important;
-}}
-
+/*
+   Keep Streamlit's header/toolbar DOM alive so the native sidebar
+   open/close control continues to work.
+*/
 header[data-testid="stHeader"] {{
+    visibility: visible !important;
+    display: block !important;
     background: transparent !important;
     border: none !important;
     box-shadow: none !important;
@@ -381,16 +350,26 @@ header[data-testid="stHeader"] {{
     margin: 0 !important;
 }}
 
-/* Remove app content's extra top spacing without hiding the header. */
-[data-testid="stAppViewContainer"] {{
-    margin-top: 0 !important;
+/*
+   Hide only the top-right actions.
+   Do NOT hide the complete stToolbar.
+*/
+header button[aria-label*="Share"],
+header button[aria-label*="Star"],
+header button[aria-label*="Edit"],
+header button[aria-label*="GitHub"],
+header button[aria-label*="Deploy"] {{
+    display: none !important;
+    visibility: hidden !important;
 }}
 
-[data-testid="stAppViewBlockContainer"] {{
-    padding-top: 0 !important;
+/* Hide Streamlit decoration without removing header controls. */
+div[data-testid="stDecoration"] {{
+    display: none !important;
+    visibility: hidden !important;
 }}
 
-/* Native sidebar controls must remain visible and clickable. */
+/* Keep native sidebar collapse control visible. */
 button[data-testid="stSidebarCollapseButton"] {{
     display: flex !important;
     visibility: visible !important;
@@ -399,6 +378,7 @@ button[data-testid="stSidebarCollapseButton"] {{
     z-index: 999999 !important;
 }}
 
+/* Keep native sidebar open control visible after collapse. */
 [data-testid="stSidebarCollapsedControl"] {{
     display: flex !important;
     visibility: visible !important;
@@ -413,6 +393,16 @@ button[data-testid="stSidebarCollapseButton"] {{
     opacity: 1 !important;
     pointer-events: auto !important;
     z-index: 1000000 !important;
+}}
+
+/* Remove extra content spacing without collapsing the header itself. */
+[data-testid="stAppViewContainer"] {{
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+}}
+
+[data-testid="stAppViewBlockContainer"] {{
+    padding-top: 0 !important;
 }}
 
 /* Streamlit button */
