@@ -124,8 +124,8 @@ Practical actions to move the business idea forward.
 
 <p align="center">
   <img
-    src="https://github.com/user-attachments/assets/cdd3d99d-5c34-4377-8680-6525c7266140"
-    alt="Autonomous Business Analyst AI System Architecture"
+    src="https://github.com/user-attachments/assets/202a18f1-d398-46af-bd16-d26f2d550ed5"
+    alt="RAG Pipeline and AI Agents"
     width="100%"
   />
 </p>
