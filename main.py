@@ -357,6 +357,30 @@ section[data-testid="stSidebar"] > div {{
     margin-right: 10px;
 }}
 
+/* =====================================================
+   HIDE STREAMLIT TOP TOOLBAR / HEADER ACTIONS
+   Keep the native sidebar open/close control working.
+===================================================== */
+
+/* Hide Share / Star / Edit / GitHub toolbar */
+div[data-testid="stToolbar"] {{
+    display: none !important;
+    visibility: hidden !important;
+}}
+
+/* Hide the small top decoration line */
+div[data-testid="stDecoration"] {{
+    display: none !important;
+}}
+
+/* Keep the Streamlit header itself available so the
+   native sidebar open/close control continues to work. */
+header[data-testid="stHeader"] {{
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+}}
+
 /* Streamlit button */
 div[data-testid="stButton"] > button {{
     border-radius: 12px !important;
