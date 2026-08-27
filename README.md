@@ -51,7 +51,8 @@ The application combines:
 # 🏗️ System Architecture
 
 <p align="center">
-  <img src="./architecture.svg" alt="Autonomous Business Analyst AI System Architecture" width="100%">
+  <img src="<img width="1672" height="940" alt="Architechture" src="https://github.com/user-attachments/assets/cdd3d99d-5c34-4377-8680-6525c7266140" />
+" alt="Autonomous Business Analyst AI System Architecture" width="100%">
 </p>
 
 ### 🔄 Workflow
@@ -72,7 +73,8 @@ The application combines:
 # 🤖 Five AI Analysis Dimensions
 
 <p align="center">
-  <img src="./analysis-dimensions.svg" alt="Five AI Analysis Dimensions" width="100%">
+  <img src="<img width="1690" height="931" alt="Five AI Analysis Dimensions" src="https://github.com/user-attachments/assets/aa834180-6f0c-48a3-a84d-c7ce9a3ec8fb" />
+" alt="Five AI Analysis Dimensions" width="100%">
 </p>
 
 | # | AI Specialist | Main Focus |
