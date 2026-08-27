@@ -1481,18 +1481,6 @@ idea = st.text_area(
     label_visibility="collapsed"
 )
 
-count = len(idea)
-
-st.html(
-    textwrap.dedent(f"""
-    <div class="char-counter">
-        {count} / 500
-        &nbsp;&nbsp;
-        <span style="color:#159d50;font-size:18px;">✓</span>
-    </div>
-    """)
-)
-
 st.markdown('<div class="generate-wrap">', unsafe_allow_html=True)
 
 generate = st.button(
