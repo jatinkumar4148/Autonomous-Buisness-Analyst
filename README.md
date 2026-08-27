@@ -51,8 +51,11 @@ The application combines:
 # 🏗️ System Architecture
 
 <p align="center">
-  <img src="<img width="1672" height="940" alt="Architechture" src="https://github.com/user-attachments/assets/cdd3d99d-5c34-4377-8680-6525c7266140" />
-" alt="Autonomous Business Analyst AI System Architecture" width="100%">
+  <img
+    src="https://github.com/user-attachments/assets/cdd3d99d-5c34-4377-8680-6525c7266140"
+    alt="Autonomous Business Analyst AI System Architecture"
+    width="100%"
+  />
 </p>
 
 ### 🔄 Workflow
