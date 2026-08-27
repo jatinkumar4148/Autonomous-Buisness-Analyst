@@ -97,7 +97,7 @@ html, body, [class*="css"] {{
 }}
 
 /* =====================================================
-   HIDE STREAMLIT DEFAULT ELEMENTS
+   STREAMLIT HEADER + SIDEBAR CONTROLS
 ===================================================== */
 
 #MainMenu {{
@@ -108,13 +108,7 @@ footer {{
     visibility: hidden !important;
 }}
 
-/*
-   IMPORTANT:
-   Do NOT hide the Streamlit header.
-   Streamlit places the sidebar collapse/open controls in the
-   header. Hiding the header makes the sidebar impossible to
-   reopen after collapsing.
-*/
+/* Keep the header because Streamlit owns the sidebar controls. */
 header {{
     visibility: visible !important;
     display: block !important;
@@ -122,42 +116,70 @@ header {{
     z-index: 999999 !important;
 }}
 
-/* Hide only the toolbar contents, not the header itself. */
-header [data-testid="stToolbar"] {{
-    visibility: hidden !important;
-    display: none !important;
-}}
-
-header [data-testid="stDecoration"] {{
-    visibility: hidden !important;
-}}
-
-header [data-testid="stStatusWidget"] {{
-    visibility: hidden !important;
-}}
-
-/* Sidebar collapse button while the sidebar is open. */
-button[data-testid="stSidebarCollapseButton"] {{
-    visibility: visible !important;
-    display: flex !important;
-    opacity: 1 !important;
-    pointer-events: auto !important;
-    z-index: 1000000 !important;
-}}
-
-/* Sidebar reopen control while the sidebar is collapsed. */
+/*
+   Keep Streamlit's collapsed-sidebar control.
+   When the sidebar is closed, this becomes the narrow left rail
+   with the "Open sidebar" control.
+*/
 [data-testid="stSidebarCollapsedControl"] {{
     visibility: visible !important;
     display: flex !important;
     opacity: 1 !important;
     pointer-events: auto !important;
+
     position: fixed !important;
-    top: 0.75rem !important;
-    left: 0.75rem !important;
+    left: 0 !important;
+    top: 0 !important;
+    width: 52px !important;
+    height: 100vh !important;
+
+    align-items: flex-start !important;
+    justify-content: center !important;
+
+    padding-top: 10px !important;
+    padding-left: 4px !important;
+    padding-right: 4px !important;
+
+    background: #000000 !important;
+    border-right: 1px solid rgba(255,255,255,.12) !important;
+
     z-index: 1000000 !important;
+    box-sizing: border-box !important;
 }}
 
+/* Working "Open sidebar" button inside the collapsed rail. */
 [data-testid="stSidebarCollapsedControl"] button {{
+    visibility: visible !important;
+    display: flex !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+
+    width: 36px !important;
+    height: 36px !important;
+    min-width: 36px !important;
+    min-height: 36px !important;
+
+    align-items: center !important;
+    justify-content: center !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    background: #151515 !important;
+    color: #ffffff !important;
+
+    border: 1px solid rgba(255,255,255,.12) !important;
+    border-radius: 8px !important;
+
+    z-index: 1000001 !important;
+}}
+
+[data-testid="stSidebarCollapsedControl"] button:hover {{
+    background: #242424 !important;
+}}
+
+/* Keep the normal collapse button visible while sidebar is open. */
+button[data-testid="stSidebarCollapseButton"] {{
     visibility: visible !important;
     display: flex !important;
     opacity: 1 !important;
@@ -165,8 +187,16 @@ button[data-testid="stSidebarCollapseButton"] {{
     z-index: 1000001 !important;
 }}
 
+/* Do not allow the hidden toolbar to remove the sidebar control. */
+header [data-testid="stToolbar"] {{
+    visibility: visible !important;
+}}
+
 /* =====================================================
    SIDEBAR
+===================================================== */
+
+
 ===================================================== */
 
 section[data-testid="stSidebar"] {{
