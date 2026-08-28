@@ -1564,61 +1564,74 @@ div[data-testid="stButton"] button:not([aria-label="Switch theme"]):hover {{
 
 
 /* =========================================================
-   MOBILE HEADER / TOOLBAR SCROLL FIX
-   The Share / Star / Edit / GitHub toolbar must scroll with
-   the page instead of staying fixed over the content.
-   Desktop rules remain unchanged.
+   MOBILE HEADER / TOOLBAR — SAME FLOW AS DESKTOP
+   Do not let Streamlit's native toolbar create a fixed overlay
+   or a large blank area on phones.
    ========================================================= */
 
 @media (max-width: 768px) {{
 
-    /* On phones Streamlit can re-apply a viewport-fixed header.
-       Make the header belong to the page instead, so its toolbar
-       scrolls away with the document and can never sit over the hero. */
     header[data-testid="stHeader"] {{
-        position: absolute !important;
-        top: 0 !important;
-        left: 0 !important;
-        right: 0 !important;
+        position: relative !important;
+        inset: auto !important;
+        top: auto !important;
+        right: auto !important;
         bottom: auto !important;
-        inset: 0 0 auto 0 !important;
+        left: auto !important;
         width: 100% !important;
-        height: 0 !important;
+        height: auto !important;
         min-height: 0 !important;
         max-height: none !important;
         margin: 0 !important;
         padding: 0 !important;
         transform: none !important;
         overflow: visible !important;
-        background: transparent !important;
         z-index: 20 !important;
     }}
 
-    /* Force every known Streamlit toolbar wrapper out of fixed/sticky
-       positioning on mobile. */
+    /* Streamlit toolbar: normal document flow, no sticky/fixed overlay. */
     header[data-testid="stHeader"] [data-testid="stToolbar"],
     header[data-testid="stHeader"] .stAppToolbar,
-    header[data-testid="stHeader"] [data-testid="stToolbarActions"],
-    header[data-testid="stHeader"] [data-testid="stToolbarActions"] > div {{
-        position: absolute !important;
-        top: 0 !important;
-        right: 0 !important;
-        left: auto !important;
+    header[data-testid="stHeader"] > div,
+    header[data-testid="stHeader"] [class*="toolbar"] {{
+        position: static !important;
+        inset: auto !important;
+        top: auto !important;
+        right: auto !important;
         bottom: auto !important;
-        inset: 0 0 auto auto !important;
-        transform: none !important;
-        width: auto !important;
+        left: auto !important;
+        width: 100% !important;
         height: auto !important;
+        min-height: 0 !important;
+        max-height: none !important;
         margin: 0 !important;
+        padding: 0 !important;
+        transform: none !important;
+        overflow: visible !important;
+        box-sizing: border-box !important;
     }}
 
-    /* Never let the toolbar itself capture the page's scrolling layer. */
-    header[data-testid="stHeader"] [data-testid="stToolbar"] {{
-        pointer-events: auto !important;
+    /* Keep the toolbar actions in one clean row, like desktop. */
+    header[data-testid="stHeader"] [data-testid="stToolbar"] > div,
+    header[data-testid="stHeader"] .stAppToolbar > div {{
+        position: static !important;
+        inset: auto !important;
+        width: 100% !important;
+        height: auto !important;
+        min-height: 0 !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        transform: none !important;
     }}
 
-    /* Sidebar controls intentionally remain fixed so the sidebar can
-       always be opened/closed, including after scrolling on mobile. */
+    /* Never reserve the huge mobile spacer created by a fixed toolbar. */
+    [data-testid="stAppViewContainer"],
+    [data-testid="stAppViewBlockContainer"] {{
+        margin-top: 0 !important;
+        padding-top: 0 !important;
+    }}
+
+    /* Sidebar controls remain independently clickable. */
     button[data-testid="stSidebarCollapseButton"],
     [data-testid="stSidebarCollapsedControl"],
     [data-testid="stSidebarCollapsedControl"] button {{
