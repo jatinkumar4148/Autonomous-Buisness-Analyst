@@ -3,6 +3,7 @@ import time
 import math
 import random
 import textwrap
+from concurrent.futures import ThreadPoolExecutor
 
 # =========================================================
 # PAGE CONFIG
@@ -39,6 +40,13 @@ if "analysis_result" not in st.session_state:
 
 if "analysis_idea" not in st.session_state:
     st.session_state.analysis_idea = ""
+
+if "analysis_future" not in st.session_state:
+    st.session_state.analysis_future = None
+
+if "analysis_job_idea" not in st.session_state:
+    st.session_state.analysis_job_idea = ""
+
 
 # =========================================================
 # THEME
@@ -1996,6 +2004,44 @@ st.html(
     """),
 )
 
+
+# =========================================================
+# PERSISTENT BACKGROUND ANALYSIS
+# Theme changes rerun Streamlit. The actual generation is
+# deliberately kept outside the rerun so it cannot restart.
+# =========================================================
+
+@st.cache_resource
+def get_analysis_executor():
+    return ThreadPoolExecutor(max_workers=1)
+
+
+def _generate_business_plan(business_idea):
+    from rag.retriever import get_vector_store
+    from graph.workflow import business_analyst_workflow
+
+    get_vector_store()
+
+    initial_state = {
+        "business_idea": business_idea,
+        "market_research": None,
+        "competitor_analysis": None,
+        "financial_plan": None,
+        "risk_analysis": None,
+        "marketing_strategy": None,
+        "final_report": None,
+        "current_step": "starting",
+        "error": None,
+    }
+
+    result = business_analyst_workflow.invoke(initial_state)
+
+    if result.get("error"):
+        raise RuntimeError(result["error"])
+
+    return result
+
+
 # =========================================================
 # BUSINESS INPUT
 # =========================================================
@@ -2059,20 +2105,27 @@ if generate:
         st.session_state.completed = False
         st.session_state.active_agent = 0
         st.session_state.progress = 0
+        st.session_state.analysis_idea = idea
+
+        # IMPORTANT:
+        # Submit the real workflow only once.
+        # Theme changes rerun the script but reuse this same Future.
+        if (
+            st.session_state.analysis_future is None
+            or st.session_state.analysis_future.done()
+        ):
+            executor = get_analysis_executor()
+            st.session_state.analysis_job_idea = idea
+            st.session_state.analysis_future = executor.submit(
+                _generate_business_plan,
+                idea
+            )
 
         st.rerun()
 
 # =========================================================
 # ANALYSIS ANIMATION
 # =========================================================
-
-agents = [
-    ("📈", "Market research"),
-    ("♧", "Competitor analysis"),
-    ("▣", "Financial planning"),
-    ("⚠", "Risk assessment"),
-    ("📣", "Marketing strategy")
-]
 
 if st.session_state.running:
 
@@ -2082,198 +2135,192 @@ if st.session_state.running:
 
     total_agents = len(agents)
 
-    for i, (icon, name) in enumerate(agents):
+    future = st.session_state.analysis_future
 
-        st.session_state.active_agent = i
+    # Never create/submit a new Future here.
+    # This block only reads the existing Future.
+    if future is not None and future.done():
 
-        # -------------------------------------------------
-        # STATUS
-        # -------------------------------------------------
+        try:
+            analysis_result = future.result()
 
-        progress_value = int((i / total_agents) * 100)
+            st.session_state.analysis_result = analysis_result
+            st.session_state.analysis_idea = st.session_state.analysis_job_idea
+            st.session_state.running = False
+            st.session_state.completed = True
+            st.session_state.active_agent = total_agents - 1
+            st.session_state.progress = 100
+            st.session_state.analysis_future = None
 
-        if i == 0:
-            message = "Analyzing market size, demand, and growth potential..."
-        elif i == 1:
-            message = "Studying competitors and finding market gaps..."
-        elif i == 2:
-            message = "Building revenue, cost, and financial projections..."
-        elif i == 3:
-            message = "Evaluating risks, challenges, and mitigation..."
-        else:
-            message = "Creating the final marketing strategy..."
+            st.rerun()
 
-        # -------------------------------------------------
-        # STATUS CARD
-        # -------------------------------------------------
+        except Exception as exc:
 
-        status_placeholder.html(
-            textwrap.dedent(f"""
-            <div class="status-card">
+            st.session_state.running = False
+            st.session_state.analysis_future = None
 
-                <div class="status-content">
+            st.error(
+                f"Could not generate the business plan: {exc}"
+            )
 
-                    <div class="ai-orb">
-                        <div class="robot">🤖</div>
+            st.stop()
+
+    # Visual progress only. It does NOT execute the agents.
+    current_step = int(
+        st.session_state.get("active_agent", 0)
+    )
+
+    if current_step >= total_agents:
+        current_step = total_agents - 1
+
+    progress_value = int(
+        (current_step / total_agents) * 100
+    )
+
+    if current_step == 0:
+        message = "Analyzing market size, demand, and growth potential..."
+    elif current_step == 1:
+        message = "Studying competitors and finding market gaps..."
+    elif current_step == 2:
+        message = "Building revenue, cost, and financial projections..."
+    elif current_step == 3:
+        message = "Evaluating risks, challenges, and mitigation..."
+    else:
+        message = "Creating the final marketing strategy..."
+
+    status_placeholder.html(
+        textwrap.dedent(f"""
+        <div class="status-card">
+            <div class="status-content">
+
+                <div class="ai-orb">
+                    <div class="robot">🤖</div>
+                </div>
+
+                <div class="status-info">
+
+                    <div class="status-title">
+                        Your analyst team is working
+                        <span class="dot"></span>
                     </div>
 
-                    <div class="status-info">
+                    <div class="status-sub">
+                        {message}
+                    </div>
 
-                        <div class="status-title">
-                            Your analyst team is working
-                            <span class="dot"></span>
+                    <div class="badges">
+
+                        <div class="badge-small">
+                            ◷ Usually takes 1–2 minutes
                         </div>
 
-                        <div class="status-sub">
-                            {message}
-                        </div>
-
-                        <div class="badges">
-
-                            <div class="badge-small">
-                                ◷ Usually takes 1–2 minutes
-                            </div>
-
-                            <div class="badge-small">
-                                ✦ Live analysis in progress
-                            </div>
-
-                        </div>
-
-                        <div class="progress-row">
-
-                            <div class="progress-track">
-
-                                <div
-                                    class="progress-fill"
-                                    style="width:{max(progress_value,8)}%;">
-                                </div>
-
-                            </div>
-
-                            <div class="progress-number">
-                                {max(progress_value,8)}%
-                            </div>
-
+                        <div class="badge-small">
+                            ✦ Live analysis in progress
                         </div>
 
                     </div>
 
-                    <div class="radar">
+                    <div class="progress-row">
 
-                        <div class="radar-circle r1"></div>
-                        <div class="radar-circle r2"></div>
-                        <div class="radar-circle r3"></div>
+                        <div class="progress-track">
 
-                        <div class="radar-scan"></div>
+                            <div
+                                class="progress-fill"
+                                style="width:{max(progress_value,8)}%;">
+                            </div>
+
+                        </div>
+
+                        <div class="progress-number">
+                            {max(progress_value,8)}%
+                        </div>
 
                     </div>
 
                 </div>
 
-            </div>
-            """),
-        )
+                <div class="radar">
 
-        # -------------------------------------------------
-        # PIPELINE
-        # -------------------------------------------------
+                    <div class="radar-circle r1"></div>
+                    <div class="radar-circle r2"></div>
+                    <div class="radar-circle r3"></div>
 
-        pipeline_html = """
-        <div class="pipeline">
-
-            <div class="pipeline-row">
-
-                <div class="pipeline-line"></div>
-        """
-
-        for j, (agent_icon, agent_name) in enumerate(agents):
-
-            if j < i:
-                cls = "agent completed"
-                status = "Completed"
-                time_text = "✓ Done"
-
-            elif j == i:
-                cls = "agent active"
-                status = "In progress"
-                time_text = f"00:{random.randint(20,59):02d}"
-
-            else:
-                cls = "agent"
-                status = "Pending"
-                time_text = "Est. 00:30"
-
-            pipeline_html += f"""
-                <div class="{cls}">
-
-                    <div class="agent-circle">
-                        {agent_icon}
-                    </div>
-
-                    <div class="agent-name">
-                        {j + 1}. {agent_name}
-                    </div>
-
-                    <div class="agent-status">
-                        {status}
-                    </div>
-
-                    <div class="agent-time">
-                        ◷ {time_text}
-                    </div>
+                    <div class="radar-scan"></div>
 
                 </div>
-            """
 
-        pipeline_html += """
             </div>
         </div>
+        """),
+    )
+
+    pipeline_html = """
+    <div class="pipeline">
+        <div class="pipeline-row">
+            <div class="pipeline-line"></div>
+    """
+
+    for j, (agent_icon, agent_name) in enumerate(agents):
+
+        if j < current_step:
+            cls = "agent completed"
+            status = "Completed"
+            time_text = "✓ Done"
+
+        elif j == current_step:
+            cls = "agent active"
+            status = "In progress"
+            time_text = f"00:{random.randint(20,59):02d}"
+
+        else:
+            cls = "agent"
+            status = "Pending"
+            time_text = "Est. 00:30"
+
+        pipeline_html += f"""
+            <div class="{cls}">
+
+                <div class="agent-circle">
+                    {agent_icon}
+                </div>
+
+                <div class="agent-name">
+                    {j + 1}. {agent_name}
+                </div>
+
+                <div class="agent-status">
+                    {status}
+                </div>
+
+                <div class="agent-time">
+                    ◷ {time_text}
+                </div>
+
+            </div>
         """
 
-        pipeline_placeholder.html(textwrap.dedent(pipeline_html))
+    pipeline_html += """
+        </div>
+    </div>
+    """
 
-        # -------------------------------------------------
-        # ANIMATION DELAY
-        # -------------------------------------------------
+    pipeline_placeholder.html(
+        textwrap.dedent(pipeline_html)
+    )
 
-        time.sleep(1.5)
+    # Move only the visual indicator forward.
+    # The actual RAG/LangGraph job is already running in the Future.
+    if future is not None and not future.done():
 
-    # =====================================================
-    # COMPLETED
-    # =====================================================
+        st.session_state.active_agent = min(
+            total_agents - 1,
+            current_step + 1
+        )
 
-    # Run the real RAG + LangGraph pipeline after the visual progress phase.
-    try:
-        from rag.retriever import get_vector_store
-        from graph.workflow import business_analyst_workflow
+    time.sleep(0.5)
 
-        get_vector_store()
-        initial_state = {
-            "business_idea": idea,
-            "market_research": None,
-            "competitor_analysis": None,
-            "financial_plan": None,
-            "risk_analysis": None,
-            "marketing_strategy": None,
-            "final_report": None,
-            "current_step": "starting",
-            "error": None,
-        }
-        analysis_result = business_analyst_workflow.invoke(initial_state)
-        if analysis_result.get("error"):
-            raise RuntimeError(analysis_result["error"])
-        st.session_state.analysis_result = analysis_result
-        st.session_state.analysis_idea = idea
-    except Exception as exc:
-        st.session_state.running = False
-        st.error(f"Could not generate the business plan: {exc}")
-        st.stop()
-
-    st.session_state.running = False
-    st.session_state.completed = True
-    st.session_state.active_agent = 4
-    st.session_state.progress = 100
+    # Poll the same Future. Theme reruns also come through here,
+    # but the Future itself is reused and never submitted again.
 
     st.rerun()
 
