@@ -1291,6 +1291,271 @@ div[data-testid="stButton"] button:not([aria-label="Switch theme"]):hover {{
     100% {{ transform: translateY(-25px) scale(0); opacity: 0; }}
 }}
 
+
+/* =========================================================
+   MOBILE RESPONSIVE OVERRIDES
+   Desktop UI remains unchanged; these rules apply only
+   to tablets and phones.
+   ========================================================= */
+
+@media (max-width: 768px) {
+
+    /* Main page spacing */
+    .main .block-container {
+        max-width: 100% !important;
+        padding: 8px 14px 40px !important;
+    }
+
+    /* Keep the hero clean on small screens */
+    .hero {
+        min-height: auto !important;
+        padding: 4px 2px 8px !important;
+    }
+
+    .hero-title {
+        font-size: clamp(34px, 10vw, 48px) !important;
+        line-height: 1.04 !important;
+        letter-spacing: -1.8px !important;
+        max-width: 100% !important;
+    }
+
+    .hero-desc {
+        font-size: 14px !important;
+        line-height: 1.6 !important;
+        max-width: 100% !important;
+        margin-top: 14px !important;
+    }
+
+    /* Decorative desktop chart is hidden instead of
+       squeezing/overlapping the hero content */
+    .graph-box {
+        display: none !important;
+    }
+
+    /* Business idea card */
+    .workspace {
+        padding: 14px !important;
+        margin-top: 8px !important;
+        border-radius: 14px !important;
+    }
+
+    .workspace-title {
+        font-size: 15px !important;
+        gap: 9px !important;
+        margin-bottom: 10px !important;
+    }
+
+    textarea {
+        min-height: 105px !important;
+        font-size: 15px !important;
+    }
+
+    .generate-wrap {
+        margin-top: 12px !important;
+    }
+
+    .generate-wrap button {
+        height: 50px !important;
+        font-size: 14px !important;
+    }
+
+    /* Analysis status card becomes a vertical layout */
+    .status-card {
+        padding: 18px 14px !important;
+        border-radius: 15px !important;
+    }
+
+    .status-content {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        text-align: center !important;
+        gap: 16px !important;
+    }
+
+    .ai-orb {
+        width: 68px !important;
+        height: 68px !important;
+        min-width: 68px !important;
+    }
+
+    .robot {
+        font-size: 26px !important;
+    }
+
+    .status-info {
+        width: 100% !important;
+        min-width: 0 !important;
+    }
+
+    .status-title {
+        font-size: 18px !important;
+        line-height: 1.35 !important;
+    }
+
+    .status-sub {
+        font-size: 13px !important;
+        line-height: 1.55 !important;
+    }
+
+    .badges {
+        width: 100% !important;
+        justify-content: center !important;
+        flex-wrap: wrap !important;
+    }
+
+    .badge-small {
+        font-size: 10px !important;
+        padding: 6px 9px !important;
+    }
+
+    .progress-row {
+        width: 100% !important;
+        gap: 10px !important;
+    }
+
+    .progress-number {
+        font-size: 18px !important;
+        min-width: 42px !important;
+    }
+
+    /* Hide the decorative radar on phones */
+    .radar {
+        display: none !important;
+    }
+
+    /* IMPORTANT: the five-agent desktop flex row was
+       overflowing on mobile. Use a 2-column grid. */
+    .pipeline {
+        padding: 18px 10px !important;
+        border-radius: 15px !important;
+        overflow: hidden !important;
+    }
+
+    .pipeline-row {
+        display: grid !important;
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+        gap: 22px 8px !important;
+        align-items: start !important;
+    }
+
+    .pipeline-line,
+    .energy-line {
+        display: none !important;
+    }
+
+    .agent {
+        width: 100% !important;
+        min-width: 0 !important;
+    }
+
+    .agent-circle {
+        width: 58px !important;
+        height: 58px !important;
+        font-size: 24px !important;
+    }
+
+    .agent-name {
+        margin-top: 9px !important;
+        font-size: 12px !important;
+        line-height: 1.35 !important;
+        overflow-wrap: anywhere !important;
+    }
+
+    .agent-status {
+        margin-top: 6px !important;
+        padding: 4px 8px !important;
+        font-size: 9px !important;
+    }
+
+    .agent-time {
+        margin-top: 6px !important;
+        font-size: 9px !important;
+    }
+
+    /* Final result card */
+    .final-card {
+        padding: 18px 14px !important;
+        min-height: auto !important;
+        border-radius: 15px !important;
+    }
+
+    .final-content {
+        flex-direction: column !important;
+        text-align: center !important;
+        gap: 12px !important;
+    }
+
+    .final-title {
+        font-size: 17px !important;
+    }
+
+    .final-sub {
+        font-size: 12px !important;
+        line-height: 1.55 !important;
+    }
+
+    /* Download/result columns should not create narrow
+       desktop-style spacing on mobile */
+    [data-testid="column"] {
+        min-width: 0 !important;
+    }
+}
+
+/* Extra-small phones */
+@media (max-width: 480px) {
+
+    .main .block-container {
+        padding-left: 10px !important;
+        padding-right: 10px !important;
+    }
+
+    .hero-title {
+        font-size: 35px !important;
+        letter-spacing: -1.5px !important;
+    }
+
+    .hero-desc {
+        font-size: 13px !important;
+    }
+
+    .workspace {
+        padding: 12px !important;
+    }
+
+    .pipeline {
+        padding: 16px 7px !important;
+    }
+
+    .pipeline-row {
+        gap: 20px 5px !important;
+    }
+
+    .agent-circle {
+        width: 54px !important;
+        height: 54px !important;
+        font-size: 22px !important;
+    }
+
+    .agent-name {
+        font-size: 11px !important;
+    }
+
+    .agent-status,
+    .agent-time {
+        font-size: 8.5px !important;
+    }
+
+    .status-card {
+        padding: 16px 11px !important;
+    }
+
+    .badge-small {
+        width: 100% !important;
+        text-align: center !important;
+    }
+}
+
 </style>
 """,
     unsafe_allow_html=True
