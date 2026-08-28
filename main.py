@@ -1573,42 +1573,6 @@ div[data-testid="stButton"] button:not([aria-label="Switch theme"]):hover {{
 
 @media (max-width: 768px) {{
 
-    /* Full-screen mobile sidebar: it must cover the app header too. */
-    section[data-testid="stSidebar"] {{
-        position: fixed !important;
-        top: 0 !important;
-        bottom: 0 !important;
-        left: 0 !important;
-        right: auto !important;
-        height: 100vh !important;
-        height: 100dvh !important;
-        max-height: none !important;
-        min-height: 100vh !important;
-        min-height: 100dvh !important;
-        width: min(78vw, 580px) !important;
-        max-width: min(78vw, 580px) !important;
-        margin: 0 !important;
-        padding: 0 !important;
-        z-index: 1000001 !important;
-        overflow: hidden !important;
-    }}
-
-    section[data-testid="stSidebar"] > div {{
-        height: 100% !important;
-        max-height: none !important;
-        padding-top: 25px !important;
-        overflow-y: auto !important;
-        overflow-x: hidden !important;
-        box-sizing: border-box !important;
-    }}
-
-    /* Sidebar open/close controls must remain above the sidebar itself. */
-    button[data-testid="stSidebarCollapseButton"],
-    [data-testid="stSidebarCollapsedControl"],
-    [data-testid="stSidebarCollapsedControl"] button {{
-        z-index: 1000002 !important;
-    }}
-
     header[data-testid="stHeader"] {{
         position: fixed !important;
         top: 0 !important;
