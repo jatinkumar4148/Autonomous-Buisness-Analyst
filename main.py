@@ -47,7 +47,6 @@ if "analysis_future" not in st.session_state:
 if "analysis_job_idea" not in st.session_state:
     st.session_state.analysis_job_idea = ""
 
-
 if "analysis_start_time" not in st.session_state:
     st.session_state.analysis_start_time = None
 
@@ -2106,7 +2105,6 @@ if generate:
     else:
 
         st.session_state.running = True
-    st.session_state.analysis_start_time = time.time()
         st.session_state.completed = False
         st.session_state.active_agent = 0
         st.session_state.progress = 0
@@ -2121,6 +2119,7 @@ if generate:
         ):
             executor = get_analysis_executor()
             st.session_state.analysis_job_idea = idea
+            st.session_state.analysis_start_time = time.time()
             st.session_state.analysis_future = executor.submit(
                 _generate_business_plan,
                 idea
@@ -2287,15 +2286,15 @@ if st.session_state.running:
         elif j == current_step:
             cls = "agent active"
             status = "In progress"
-            elapsed = int(
-            time.time() - st.session_state.get(
-                "analysis_start_time",
-                time.time()
-            )
-        )
-        minutes = elapsed // 60
-        seconds = elapsed % 60
-        time_text = f"{minutes:02d}:{seconds:02d}"
+
+            start_time = st.session_state.get("analysis_start_time")
+            if start_time is not None:
+                elapsed = max(0, int(time.time() - start_time))
+                minutes = elapsed // 60
+                seconds = elapsed % 60
+                time_text = f"{minutes:02d}:{seconds:02d}"
+            else:
+                time_text = "00:00"
 
         else:
             cls = "agent"
