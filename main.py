@@ -48,6 +48,10 @@ if "analysis_job_idea" not in st.session_state:
     st.session_state.analysis_job_idea = ""
 
 
+if "analysis_start_time" not in st.session_state:
+    st.session_state.analysis_start_time = None
+
+
 # =========================================================
 # THEME
 # =========================================================
@@ -2102,6 +2106,7 @@ if generate:
     else:
 
         st.session_state.running = True
+    st.session_state.analysis_start_time = time.time()
         st.session_state.completed = False
         st.session_state.active_agent = 0
         st.session_state.progress = 0
@@ -2282,7 +2287,15 @@ if st.session_state.running:
         elif j == current_step:
             cls = "agent active"
             status = "In progress"
-            time_text = f"00:{random.randint(20,59):02d}"
+            elapsed = int(
+            time.time() - st.session_state.get(
+                "analysis_start_time",
+                time.time()
+            )
+        )
+        minutes = elapsed // 60
+        seconds = elapsed % 60
+        time_text = f"{minutes:02d}:{seconds:02d}"
 
         else:
             cls = "agent"
