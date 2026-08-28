@@ -1360,31 +1360,43 @@ div[data-testid="stButton"] button:not([aria-label="Switch theme"]):hover {{
     }}
 
 
-    /* Keep Streamlit warning visually consistent with desktop */
+    /* Mobile warning: show only one visible box */
     [data-testid="stAlert"] {{
         width: 100% !important;
         box-sizing: border-box !important;
         margin: 12px 0 16px !important;
+        padding: 0 !important;
+        min-height: 0 !important;
+        border: 0 !important;
+        border-radius: 0 !important;
+        background: transparent !important;
+        box-shadow: none !important;
+        font-size: 14px !important;
+        line-height: 1.4 !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+    }}
+
+    [data-testid="stAlert"] > div {{
+        box-sizing: border-box !important;
+        width: 100% !important;
         padding: 12px 16px !important;
         min-height: 56px !important;
         border-radius: 9px !important;
-        font-size: 14px !important;
-        line-height: 1.4 !important;
+        background: #fffbd6 !important;
+        border: 0 !important;
+        box-shadow: none !important;
+        opacity: 1 !important;
+        visibility: visible !important;
     }}
 
-    [data-testid="stAlert"],
     [data-testid="stAlert"] *,
     [data-testid="stAlert"] p,
-    [data-testid="stAlert"] span,
-    [data-testid="stAlert"] div {{
+    [data-testid="stAlert"] span {{
         opacity: 1 !important;
         visibility: visible !important;
         color: #9a6700 !important;
         -webkit-text-fill-color: #9a6700 !important;
-    }}
-
-    [data-testid="stAlert"] {{
-        background: #fffbd6 !important;
     }}
 
     /* Analysis status card becomes a vertical layout */
