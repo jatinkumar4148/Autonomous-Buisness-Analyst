@@ -369,7 +369,6 @@ header[data-testid="stHeader"] {{
 header button[aria-label*="Share"],
 header button[aria-label*="Star"],
 header button[aria-label*="Edit"],
-header button[aria-label*="GitHub"],
 header button[aria-label*="Deploy"] {{
     display: none !important;
     visibility: hidden !important;
