@@ -363,38 +363,16 @@ header[data-testid="stHeader"] {{
 }}
 
 /*
-   Keep the top-right actions visible in BOTH light and dark mode.
-   Their color follows the current theme text color.
+   Hide only the top-right actions.
+   Do NOT hide the complete stToolbar.
 */
-header[data-testid="stHeader"] button[aria-label*="Share"],
-header[data-testid="stHeader"] button[aria-label*="Star"],
-header[data-testid="stHeader"] button[aria-label*="Edit"],
-header[data-testid="stHeader"] button[aria-label*="GitHub"],
-header[data-testid="stHeader"] button[aria-label*="Deploy"] {{
-    display: flex !important;
-    visibility: visible !important;
-    opacity: 1 !important;
-    color: {TEXT} !important;
-}}
-
-header[data-testid="stHeader"] button[aria-label*="Share"] svg,
-header[data-testid="stHeader"] button[aria-label*="Star"] svg,
-header[data-testid="stHeader"] button[aria-label*="Edit"] svg,
-header[data-testid="stHeader"] button[aria-label*="GitHub"] svg,
-header[data-testid="stHeader"] button[aria-label*="Deploy"] svg {{
-    color: {TEXT} !important;
-    stroke: {TEXT} !important;
-    opacity: 1 !important;
-    visibility: visible !important;
-}}
-
-header[data-testid="stHeader"] button[aria-label*="Share"] *,
-header[data-testid="stHeader"] button[aria-label*="Star"] *,
-header[data-testid="stHeader"] button[aria-label*="Edit"] *,
-header[data-testid="stHeader"] button[aria-label*="GitHub"] *,
-header[data-testid="stHeader"] button[aria-label*="Deploy"] * {{
-    opacity: 1 !important;
-    visibility: visible !important;
+header button[aria-label*="Share"],
+header button[aria-label*="Star"],
+header button[aria-label*="Edit"],
+header button[aria-label*="GitHub"],
+header button[aria-label*="Deploy"] {{
+    display: none !important;
+    visibility: hidden !important;
 }}
 
 /* Hide Streamlit decoration without removing header controls. */
