@@ -1564,46 +1564,55 @@ div[data-testid="stButton"] button:not([aria-label="Switch theme"]):hover {{
 
 
 /* =========================================================
-   MOBILE HEADER / TOOLBAR — SAME FLOW AS DESKTOP
-   Do not let Streamlit's native toolbar create a fixed overlay
-   or a large blank area on phones.
+   MOBILE HEADER / TOOLBAR — FIXED LIKE DESKTOP
+   Keep Streamlit's header area fixed at the top while the
+   actual application content scrolls underneath it.
+   This matches the desktop behavior and prevents the
+   Share/Star/Edit/GitHub controls from sitting over content.
    ========================================================= */
 
 @media (max-width: 768px) {{
 
     header[data-testid="stHeader"] {{
-        position: relative !important;
-        inset: auto !important;
-        top: auto !important;
-        right: auto !important;
+        position: fixed !important;
+        top: 0 !important;
+        right: 0 !important;
         bottom: auto !important;
-        left: auto !important;
+        left: 0 !important;
         width: 100% !important;
-        height: auto !important;
-        min-height: 0 !important;
-        max-height: none !important;
+        height: 2.75rem !important;
+        min-height: 2.75rem !important;
+        max-height: 2.75rem !important;
+
         margin: 0 !important;
         padding: 0 !important;
         transform: none !important;
         overflow: visible !important;
-        z-index: 20 !important;
+
+        background: {BG} !important;
+        z-index: 999990 !important;
     }}
 
-    /* Streamlit toolbar: normal document flow, no sticky/fixed overlay. */
+    /*
+       Keep the toolbar inside the fixed header.
+       Do NOT make its children fixed independently.
+    */
     header[data-testid="stHeader"] [data-testid="stToolbar"],
     header[data-testid="stHeader"] .stAppToolbar,
     header[data-testid="stHeader"] > div,
     header[data-testid="stHeader"] [class*="toolbar"] {{
-        position: static !important;
-        inset: auto !important;
+        position: relative !important;
         top: auto !important;
         right: auto !important;
         bottom: auto !important;
         left: auto !important;
+        inset: auto !important;
+
         width: 100% !important;
-        height: auto !important;
-        min-height: 0 !important;
-        max-height: none !important;
+        height: 2.75rem !important;
+        min-height: 2.75rem !important;
+        max-height: 2.75rem !important;
+
         margin: 0 !important;
         padding: 0 !important;
         transform: none !important;
@@ -1611,27 +1620,43 @@ div[data-testid="stButton"] button:not([aria-label="Switch theme"]):hover {{
         box-sizing: border-box !important;
     }}
 
-    /* Keep the toolbar actions in one clean row, like desktop. */
     header[data-testid="stHeader"] [data-testid="stToolbar"] > div,
     header[data-testid="stHeader"] .stAppToolbar > div {{
-        position: static !important;
+        position: relative !important;
+        top: auto !important;
+        right: auto !important;
+        bottom: auto !important;
+        left: auto !important;
         inset: auto !important;
+
         width: 100% !important;
-        height: auto !important;
-        min-height: 0 !important;
+        height: 2.75rem !important;
+        min-height: 2.75rem !important;
+
         margin: 0 !important;
         padding: 0 !important;
         transform: none !important;
     }}
 
-    /* Never reserve the huge mobile spacer created by a fixed toolbar. */
-    [data-testid="stAppViewContainer"],
-    [data-testid="stAppViewBlockContainer"] {{
+    /*
+       Reserve exactly the fixed-header height.
+       This is the important part: page content starts below
+       the toolbar instead of being hidden behind it.
+    */
+    [data-testid="stAppViewContainer"] {{
         margin-top: 0 !important;
-        padding-top: 0 !important;
+        padding-top: 2.75rem !important;
     }}
 
-    /* Sidebar controls remain independently clickable. */
+    [data-testid="stAppViewBlockContainer"] {{
+        padding-top: 0 !important;
+        margin-top: 0 !important;
+    }}
+
+    /*
+       Sidebar buttons stay above the fixed header and remain
+       clickable in both expanded and collapsed states.
+    */
     button[data-testid="stSidebarCollapseButton"],
     [data-testid="stSidebarCollapsedControl"],
     [data-testid="stSidebarCollapsedControl"] button {{
