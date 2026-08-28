@@ -343,11 +343,23 @@ section[data-testid="stSidebar"] > div {{
 header[data-testid="stHeader"] {{
     visibility: visible !important;
     display: block !important;
+
+    /* IMPORTANT:
+       Streamlit normally keeps this header fixed at the top.
+       Make it part of the normal document flow so Share/Star/Edit/GitHub
+       scroll naturally with the page instead of overlapping content. */
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    right: auto !important;
+    width: 100% !important;
+
     background: transparent !important;
     border: none !important;
     box-shadow: none !important;
     padding: 0 !important;
     margin: 0 !important;
+    z-index: 10 !important;
 }}
 
 /*
@@ -375,6 +387,9 @@ button[data-testid="stSidebarCollapseButton"] {{
     visibility: visible !important;
     opacity: 1 !important;
     pointer-events: auto !important;
+
+    /* Sidebar toggle stays usable while the header scrolls away. */
+    position: fixed !important;
     z-index: 999999 !important;
 }}
 
@@ -384,6 +399,10 @@ button[data-testid="stSidebarCollapseButton"] {{
     visibility: visible !important;
     opacity: 1 !important;
     pointer-events: auto !important;
+
+    /* Keep the collapsed-sidebar button visible independently of the
+       scrolling header. */
+    position: fixed !important;
     z-index: 999999 !important;
 }}
 
@@ -392,6 +411,7 @@ button[data-testid="stSidebarCollapseButton"] {{
     visibility: visible !important;
     opacity: 1 !important;
     pointer-events: auto !important;
+    position: fixed !important;
     z-index: 1000000 !important;
 }}
 
