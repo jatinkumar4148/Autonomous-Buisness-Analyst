@@ -427,12 +427,25 @@ button[data-testid="stSidebarCollapseButton"]:hover,
     box-shadow: 0 6px 18px rgba(0,0,0,.32) !important;
 }}
 
-/* Hide Streamlit's default arrow / double-chevron icon */
+/* Hide Streamlit's default arrow / double-chevron icon.
+   Newer Streamlit renders this as a <span data-testid="stIconMaterial">
+   ligature (not an <svg>), so every direct child of the button
+   (svg, span, div wrapper - whatever Streamlit's version uses)
+   is hidden here, leaving only our own hamburger glyph below. */
+button[data-testid="stSidebarCollapseButton"] > *,
+[data-testid="stSidebarCollapsedControl"] button > *,
 button[data-testid="stSidebarCollapseButton"] svg,
-[data-testid="stSidebarCollapsedControl"] button svg {{
+[data-testid="stSidebarCollapsedControl"] button svg,
+button[data-testid="stSidebarCollapseButton"] span,
+[data-testid="stSidebarCollapsedControl"] button span,
+button[data-testid="stSidebarCollapseButton"] [data-testid="stIconMaterial"],
+[data-testid="stSidebarCollapsedControl"] button [data-testid="stIconMaterial"] {{
     display: none !important;
     visibility: hidden !important;
     opacity: 0 !important;
+    width: 0 !important;
+    height: 0 !important;
+    font-size: 0 !important;
 }}
 
 /* Draw a clean hamburger (☰) glyph in place of the icon.
