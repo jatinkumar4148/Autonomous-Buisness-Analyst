@@ -1562,6 +1562,55 @@ div[data-testid="stButton"] button:not([aria-label="Switch theme"]):hover {{
     }}
 }}
 
+
+/* =========================================================
+   MOBILE HEADER / TOOLBAR SCROLL FIX
+   The Share / Star / Edit / GitHub toolbar must scroll with
+   the page instead of staying fixed over the content.
+   Desktop rules remain unchanged.
+   ========================================================= */
+
+@media (max-width: 768px) {{
+
+    header[data-testid="stHeader"] {{
+        position: relative !important;
+        top: auto !important;
+        bottom: auto !important;
+        left: auto !important;
+        right: auto !important;
+        inset: auto !important;
+        width: 100% !important;
+        height: auto !important;
+        min-height: 0 !important;
+        max-height: none !important;
+        transform: none !important;
+        overflow: visible !important;
+        z-index: 10 !important;
+    }}
+
+    /* Streamlit toolbar must not become a fixed/sticky overlay. */
+    header[data-testid="stHeader"] [data-testid="stToolbar"],
+    header[data-testid="stHeader"] .stAppToolbar,
+    header[data-testid="stHeader"] > div {{
+        position: relative !important;
+        top: auto !important;
+        bottom: auto !important;
+        left: auto !important;
+        right: auto !important;
+        inset: auto !important;
+        width: auto !important;
+        transform: none !important;
+    }}
+
+    /* Keep the sidebar controls above the page and clickable. */
+    button[data-testid="stSidebarCollapseButton"],
+    [data-testid="stSidebarCollapsedControl"],
+    [data-testid="stSidebarCollapsedControl"] button {{
+        position: fixed !important;
+        z-index: 1000000 !important;
+    }}
+}}
+
 /* Extra-small phones */
 @media (max-width: 480px) {{
 
