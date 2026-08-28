@@ -1361,7 +1361,7 @@ div[data-testid="stButton"] button:not([aria-label="Switch theme"]):hover {{
 
 
     /* Keep Streamlit warning visually consistent with desktop */
-    [data-testid="stAlert"] {
+    [data-testid="stAlert"] {{
         width: 100% !important;
         box-sizing: border-box !important;
         margin: 12px 0 16px !important;
@@ -1370,12 +1370,12 @@ div[data-testid="stButton"] button:not([aria-label="Switch theme"]):hover {{
         border-radius: 9px !important;
         font-size: 14px !important;
         line-height: 1.4 !important;
-    }
+    }}
 
-    [data-testid="stAlert"] * {
+    [data-testid="stAlert"] * {{
         opacity: 1 !important;
         visibility: visible !important;
-    }
+    }}
 
     /* Analysis status card becomes a vertical layout */
     .status-card {{
