@@ -343,23 +343,11 @@ section[data-testid="stSidebar"] > div {{
 header[data-testid="stHeader"] {{
     visibility: visible !important;
     display: block !important;
-
-    /* IMPORTANT:
-       Streamlit normally keeps this header fixed at the top.
-       Make it part of the normal document flow so Share/Star/Edit/GitHub
-       scroll naturally with the page instead of overlapping content. */
-    position: relative !important;
-    top: auto !important;
-    left: auto !important;
-    right: auto !important;
-    width: 100% !important;
-
     background: transparent !important;
     border: none !important;
     box-shadow: none !important;
     padding: 0 !important;
     margin: 0 !important;
-    z-index: 10 !important;
 }}
 
 /*
@@ -387,9 +375,6 @@ button[data-testid="stSidebarCollapseButton"] {{
     visibility: visible !important;
     opacity: 1 !important;
     pointer-events: auto !important;
-
-    /* Sidebar toggle stays usable while the header scrolls away. */
-    position: fixed !important;
     z-index: 999999 !important;
 }}
 
@@ -399,10 +384,6 @@ button[data-testid="stSidebarCollapseButton"] {{
     visibility: visible !important;
     opacity: 1 !important;
     pointer-events: auto !important;
-
-    /* Keep the collapsed-sidebar button visible independently of the
-       scrolling header. */
-    position: fixed !important;
     z-index: 999999 !important;
 }}
 
@@ -411,7 +392,6 @@ button[data-testid="stSidebarCollapseButton"] {{
     visibility: visible !important;
     opacity: 1 !important;
     pointer-events: auto !important;
-    position: fixed !important;
     z-index: 1000000 !important;
 }}
 
@@ -1380,46 +1360,24 @@ div[data-testid="stButton"] button:not([aria-label="Switch theme"]):hover {{
     }}
 
 
-    /* Mobile warning: show only one visible box */
+    /* Keep Streamlit warning visually consistent with desktop */
     [data-testid="stAlert"] {{
         width: 100% !important;
         box-sizing: border-box !important;
         margin: 12px 0 16px !important;
-        padding: 0 !important;
-        min-height: 0 !important;
-        border: 0 !important;
-        border-radius: 0 !important;
-        background: transparent !important;
-        box-shadow: none !important;
-        font-size: 14px !important;
-        line-height: 1.4 !important;
-        opacity: 1 !important;
-        visibility: visible !important;
-    }}
-
-    [data-testid="stAlert"] > div {{
-        box-sizing: border-box !important;
-        width: 100% !important;
         padding: 12px 16px !important;
         min-height: 56px !important;
         border-radius: 9px !important;
-        background: #fffbd6 !important;
-        border: 0 !important;
-        box-shadow: none !important;
+        font-size: 14px !important;
+        line-height: 1.4 !important;
+    }}
+
+    [data-testid="stAlert"] * {{
         opacity: 1 !important;
         visibility: visible !important;
     }}
 
-    [data-testid="stAlert"] *,
-    [data-testid="stAlert"] p,
-    [data-testid="stAlert"] span {{
-        opacity: 1 !important;
-        visibility: visible !important;
-        color: #9a6700 !important;
-        -webkit-text-fill-color: #9a6700 !important;
-    }}
-
-    /* Analysis status card becomes a vertical layout */
+    /* Preserve desktop composition on mobile without overlap */
     .status-card {{
         padding: 18px 14px !important;
         border-radius: 15px !important;
@@ -1427,86 +1385,99 @@ div[data-testid="stButton"] button:not([aria-label="Switch theme"]):hover {{
 
     .status-content {{
         display: flex !important;
-        flex-direction: column !important;
+        flex-direction: row !important;
         align-items: center !important;
-        text-align: center !important;
-        gap: 16px !important;
+        text-align: left !important;
+        gap: 12px !important;
     }}
 
     .ai-orb {{
-        width: 68px !important;
-        height: 68px !important;
-        min-width: 68px !important;
+        width: 64px !important;
+        height: 64px !important;
+        min-width: 64px !important;
     }}
 
     .robot {{
-        font-size: 26px !important;
+        font-size: 25px !important;
     }}
 
     .status-info {{
-        width: 100% !important;
+        width: auto !important;
         min-width: 0 !important;
+        flex: 1 1 auto !important;
     }}
 
     .status-title {{
-        font-size: 18px !important;
-        line-height: 1.35 !important;
+        font-size: 17px !important;
+        line-height: 1.3 !important;
     }}
 
     .status-sub {{
-        font-size: 13px !important;
-        line-height: 1.55 !important;
+        font-size: 12px !important;
+        line-height: 1.45 !important;
     }}
 
     .badges {{
-        width: 100% !important;
-        justify-content: center !important;
+        width: auto !important;
+        justify-content: flex-start !important;
         flex-wrap: wrap !important;
     }}
 
     .badge-small {{
-        font-size: 10px !important;
-        padding: 6px 9px !important;
+        font-size: 9px !important;
+        padding: 5px 7px !important;
     }}
 
     .progress-row {{
         width: 100% !important;
-        gap: 10px !important;
+        gap: 8px !important;
     }}
 
     .progress-number {{
-        font-size: 18px !important;
-        min-width: 42px !important;
+        font-size: 17px !important;
+        min-width: 38px !important;
     }}
 
-    /* Hide the decorative radar on phones */
+    /* Keep the decorative radar, scaled down */
     .radar {{
-        display: none !important;
+        display: block !important;
+        width: 78px !important;
+        height: 78px !important;
+        flex: 0 0 78px !important;
     }}
 
-    /* IMPORTANT: the five-agent desktop flex row was
-       overflowing on mobile. Use a 2-column grid. */
+    .r1 {{ width: 34px !important; height: 34px !important; }}
+    .r2 {{ width: 54px !important; height: 54px !important; }}
+    .r3 {{ width: 72px !important; height: 72px !important; }}
+    .radar-scan {{ width: 42px !important; height: 42px !important; }}
+
+    /* Keep all five agents in the same desktop-style row.
+       Horizontal scrolling prevents overlap on narrow phones. */
     .pipeline {{
         padding: 18px 10px !important;
         border-radius: 15px !important;
-        overflow: hidden !important;
+        overflow-x: auto !important;
+        overflow-y: hidden !important;
+        -webkit-overflow-scrolling: touch !important;
     }}
 
     .pipeline-row {{
-        display: grid !important;
-        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-        gap: 22px 8px !important;
-        align-items: start !important;
+        display: flex !important;
+        flex-wrap: nowrap !important;
+        justify-content: space-between !important;
+        gap: 12px !important;
+        min-width: 620px !important;
     }}
 
     .pipeline-line,
     .energy-line {{
-        display: none !important;
+        display: block !important;
     }}
 
     .agent {{
-        width: 100% !important;
-        min-width: 0 !important;
+        flex: 0 0 112px !important;
+        width: 112px !important;
+        min-width: 112px !important;
     }}
 
     .agent-circle {{
@@ -1517,9 +1488,9 @@ div[data-testid="stButton"] button:not([aria-label="Switch theme"]):hover {{
 
     .agent-name {{
         margin-top: 9px !important;
-        font-size: 12px !important;
+        font-size: 11px !important;
         line-height: 1.35 !important;
-        overflow-wrap: anywhere !important;
+        overflow-wrap: normal !important;
     }}
 
     .agent-status {{
@@ -1562,145 +1533,6 @@ div[data-testid="stButton"] button:not([aria-label="Switch theme"]):hover {{
     }}
 }}
 
-
-/* =========================================================
-   MOBILE HEADER / TOOLBAR — FIXED LIKE DESKTOP
-   Keep Streamlit's header area fixed at the top while the
-   actual application content scrolls underneath it.
-   This matches the desktop behavior and prevents the
-   Share/Star/Edit/GitHub controls from sitting over content.
-   ========================================================= */
-
-@media (max-width: 768px) {{
-
-    /* Full-screen mobile sidebar: it must cover the app header too. */
-    section[data-testid="stSidebar"] {{
-        position: fixed !important;
-        top: 0 !important;
-        bottom: 0 !important;
-        left: 0 !important;
-        right: auto !important;
-        height: 100vh !important;
-        height: 100dvh !important;
-        max-height: none !important;
-        min-height: 100vh !important;
-        min-height: 100dvh !important;
-        width: min(78vw, 580px) !important;
-        max-width: min(78vw, 580px) !important;
-        margin: 0 !important;
-        padding: 0 !important;
-        z-index: 1000001 !important;
-        overflow: hidden !important;
-    }}
-
-    section[data-testid="stSidebar"] > div {{
-        height: 100% !important;
-        max-height: none !important;
-        padding-top: 25px !important;
-        overflow-y: auto !important;
-        overflow-x: hidden !important;
-        box-sizing: border-box !important;
-    }}
-
-    /* Sidebar open/close controls must remain above the sidebar itself. */
-    button[data-testid="stSidebarCollapseButton"],
-    [data-testid="stSidebarCollapsedControl"],
-    [data-testid="stSidebarCollapsedControl"] button {{
-        z-index: 1000002 !important;
-    }}
-
-    header[data-testid="stHeader"] {{
-        position: fixed !important;
-        top: 0 !important;
-        right: 0 !important;
-        bottom: auto !important;
-        left: 0 !important;
-        width: 100% !important;
-        height: 2.75rem !important;
-        min-height: 2.75rem !important;
-        max-height: 2.75rem !important;
-
-        margin: 0 !important;
-        padding: 0 !important;
-        transform: none !important;
-        overflow: visible !important;
-
-        background: {BG} !important;
-        z-index: 999990 !important;
-    }}
-
-    /*
-       Keep the toolbar inside the fixed header.
-       Do NOT make its children fixed independently.
-    */
-    header[data-testid="stHeader"] [data-testid="stToolbar"],
-    header[data-testid="stHeader"] .stAppToolbar,
-    header[data-testid="stHeader"] > div,
-    header[data-testid="stHeader"] [class*="toolbar"] {{
-        position: relative !important;
-        top: auto !important;
-        right: auto !important;
-        bottom: auto !important;
-        left: auto !important;
-        inset: auto !important;
-
-        width: 100% !important;
-        height: 2.75rem !important;
-        min-height: 2.75rem !important;
-        max-height: 2.75rem !important;
-
-        margin: 0 !important;
-        padding: 0 !important;
-        transform: none !important;
-        overflow: visible !important;
-        box-sizing: border-box !important;
-    }}
-
-    header[data-testid="stHeader"] [data-testid="stToolbar"] > div,
-    header[data-testid="stHeader"] .stAppToolbar > div {{
-        position: relative !important;
-        top: auto !important;
-        right: auto !important;
-        bottom: auto !important;
-        left: auto !important;
-        inset: auto !important;
-
-        width: 100% !important;
-        height: 2.75rem !important;
-        min-height: 2.75rem !important;
-
-        margin: 0 !important;
-        padding: 0 !important;
-        transform: none !important;
-    }}
-
-    /*
-       Reserve exactly the fixed-header height.
-       This is the important part: page content starts below
-       the toolbar instead of being hidden behind it.
-    */
-    [data-testid="stAppViewContainer"] {{
-        margin-top: 0 !important;
-        padding-top: 2.75rem !important;
-    }}
-
-    [data-testid="stAppViewBlockContainer"] {{
-        padding-top: 0 !important;
-        margin-top: 0 !important;
-    }}
-
-    /*
-       Sidebar buttons stay above the fixed header and remain
-       clickable in both expanded and collapsed states.
-    */
-    button[data-testid="stSidebarCollapseButton"],
-    [data-testid="stSidebarCollapsedControl"],
-    [data-testid="stSidebarCollapsedControl"] button {{
-        position: fixed !important;
-        z-index: 1000000 !important;
-    }}
-}}
-
 /* Extra-small phones */
 @media (max-width: 480px) {{
 
@@ -1727,7 +1559,8 @@ div[data-testid="stButton"] button:not([aria-label="Switch theme"]):hover {{
     }}
 
     .pipeline-row {{
-        gap: 20px 5px !important;
+        gap: 12px !important;
+        min-width: 620px !important;
     }}
 
     .agent-circle {{
@@ -1750,8 +1583,8 @@ div[data-testid="stButton"] button:not([aria-label="Switch theme"]):hover {{
     }}
 
     .badge-small {{
-        width: 100% !important;
-        text-align: center !important;
+        width: auto !important;
+        text-align: left !important;
     }}
 }}
 
