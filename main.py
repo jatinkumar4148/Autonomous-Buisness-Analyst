@@ -369,30 +369,97 @@ div[data-testid="stDecoration"] {{
     visibility: hidden !important;
 }}
 
-/* Keep native sidebar collapse control visible. */
-button[data-testid="stSidebarCollapseButton"] {{
-    display: flex !important;
-    visibility: visible !important;
-    opacity: 1 !important;
-    pointer-events: auto !important;
-    z-index: 999999 !important;
-}}
+/* =====================================================
+   SIDEBAR TOGGLE — ALWAYS VISIBLE
+   Keep Streamlit's real native buttons so open/close still works.
+   Only change their appearance to the requested compact menu icon.
+===================================================== */
 
-/* Keep native sidebar open control visible after collapse. */
-[data-testid="stSidebarCollapsedControl"] {{
-    display: flex !important;
-    visibility: visible !important;
-    opacity: 1 !important;
-    pointer-events: auto !important;
-    z-index: 999999 !important;
-}}
-
+button[data-testid="stSidebarCollapseButton"],
+[data-testid="stSidebarCollapsedControl"],
 [data-testid="stSidebarCollapsedControl"] button {{
     display: flex !important;
     visibility: visible !important;
     opacity: 1 !important;
     pointer-events: auto !important;
-    z-index: 1000000 !important;
+    z-index: 999999 !important;
+}}
+
+/* Compact square button — works in light and dark mode. */
+button[data-testid="stSidebarCollapseButton"],
+[data-testid="stSidebarCollapsedControl"] button {{
+    width: 34px !important;
+    height: 34px !important;
+    min-width: 34px !important;
+    min-height: 34px !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    border: 1px solid rgba(80, 95, 100, .65) !important;
+    border-radius: 7px !important;
+    background: rgba(255,255,255,.82) !important;
+    color: #253238 !important;
+    box-shadow: none !important;
+    position: relative !important;
+    overflow: hidden !important;
+}}
+
+/* Remove Streamlit's chevron/icon and draw a stable hamburger. */
+button[data-testid="stSidebarCollapseButton"] svg,
+[data-testid="stSidebarCollapsedControl"] button svg {{
+    display: none !important;
+    visibility: hidden !important;
+}}
+
+button[data-testid="stSidebarCollapseButton"]::before,
+[data-testid="stSidebarCollapsedControl"] button::before {{
+    content: "☰" !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 100% !important;
+    height: 100% !important;
+    font-size: 17px !important;
+    line-height: 1 !important;
+    font-weight: 500 !important;
+    color: #253238 !important;
+}}
+
+button[data-testid="stSidebarCollapseButton"]:hover,
+[data-testid="stSidebarCollapsedControl"] button:hover {{
+    background: rgba(255,255,255,.96) !important;
+    border-color: rgba(80, 95, 100, .9) !important;
+}}
+
+/* Make the collapsed-control wrapper itself compact and visible. */
+[data-testid="stSidebarCollapsedControl"] {{
+    position: fixed !important;
+    top: 14px !important;
+    left: 14px !important;
+    width: 34px !important;
+    height: 34px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: transparent !important;
+}}
+
+/* When the sidebar is open, keep the same button near the top-left. */
+button[data-testid="stSidebarCollapseButton"] {{
+    position: relative !important;
+    top: 0 !important;
+    left: 0 !important;
+}}
+
+/* Dark mode: same button remains clearly visible. */
+[data-theme="dark"] button[data-testid="stSidebarCollapseButton"],
+[data-theme="dark"] [data-testid="stSidebarCollapsedControl"] button {{
+    background: rgba(20, 28, 30, .96) !important;
+    border-color: rgba(190, 205, 210, .55) !important;
+    color: #f4faf7 !important;
+}}
+
+[data-theme="dark"] button[data-testid="stSidebarCollapseButton"]::before,
+[data-theme="dark"] [data-testid="stSidebarCollapsedControl"] button::before {{
+    color: #f4faf7 !important;
 }}
 
 /* Remove extra content spacing without collapsing the header itself. */
