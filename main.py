@@ -3,6 +3,7 @@ import time
 import math
 import random
 import textwrap
+import threading
 
 # =========================================================
 # PAGE CONFIG
@@ -31,6 +32,10 @@ if "completed" not in st.session_state:
 if "active_agent" not in st.session_state:
     st.session_state.active_agent = 0
 
+# Preserve visual analysis progress when Streamlit reruns (e.g. theme change).
+if "analysis_step" not in st.session_state:
+    st.session_state.analysis_step = 0
+
 if "progress" not in st.session_state:
     st.session_state.progress = 0
 
@@ -39,6 +44,16 @@ if "analysis_result" not in st.session_state:
 
 if "analysis_idea" not in st.session_state:
     st.session_state.analysis_idea = ""
+
+
+if "analysis_job" not in st.session_state:
+    st.session_state.analysis_job = None
+
+if "analysis_job_idea" not in st.session_state:
+    st.session_state.analysis_job_idea = ""
+
+if "analysis_job_error" not in st.session_state:
+    st.session_state.analysis_job_error = None
 
 # =========================================================
 # THEME
@@ -343,11 +358,23 @@ section[data-testid="stSidebar"] > div {{
 header[data-testid="stHeader"] {{
     visibility: visible !important;
     display: block !important;
+
+    /* IMPORTANT:
+       Streamlit normally keeps this header fixed at the top.
+       Make it part of the normal document flow so Share/Star/Edit/GitHub
+       scroll naturally with the page instead of overlapping content. */
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    right: auto !important;
+    width: 100% !important;
+
     background: transparent !important;
     border: none !important;
     box-shadow: none !important;
     padding: 0 !important;
     margin: 0 !important;
+    z-index: 10 !important;
 }}
 
 /*
@@ -375,6 +402,9 @@ button[data-testid="stSidebarCollapseButton"] {{
     visibility: visible !important;
     opacity: 1 !important;
     pointer-events: auto !important;
+
+    /* Sidebar toggle stays usable while the header scrolls away. */
+    position: fixed !important;
     z-index: 999999 !important;
 }}
 
@@ -384,6 +414,10 @@ button[data-testid="stSidebarCollapseButton"] {{
     visibility: visible !important;
     opacity: 1 !important;
     pointer-events: auto !important;
+
+    /* Keep the collapsed-sidebar button visible independently of the
+       scrolling header. */
+    position: fixed !important;
     z-index: 999999 !important;
 }}
 
@@ -392,6 +426,7 @@ button[data-testid="stSidebarCollapseButton"] {{
     visibility: visible !important;
     opacity: 1 !important;
     pointer-events: auto !important;
+    position: fixed !important;
     z-index: 1000000 !important;
 }}
 
@@ -1360,24 +1395,46 @@ div[data-testid="stButton"] button:not([aria-label="Switch theme"]):hover {{
     }}
 
 
-    /* Keep Streamlit warning visually consistent with desktop */
+    /* Mobile warning: show only one visible box */
     [data-testid="stAlert"] {{
         width: 100% !important;
         box-sizing: border-box !important;
         margin: 12px 0 16px !important;
-        padding: 12px 16px !important;
-        min-height: 56px !important;
-        border-radius: 9px !important;
+        padding: 0 !important;
+        min-height: 0 !important;
+        border: 0 !important;
+        border-radius: 0 !important;
+        background: transparent !important;
+        box-shadow: none !important;
         font-size: 14px !important;
         line-height: 1.4 !important;
-    }}
-
-    [data-testid="stAlert"] * {{
         opacity: 1 !important;
         visibility: visible !important;
     }}
 
-    /* Preserve desktop composition on mobile without overlap */
+    [data-testid="stAlert"] > div {{
+        box-sizing: border-box !important;
+        width: 100% !important;
+        padding: 12px 16px !important;
+        min-height: 56px !important;
+        border-radius: 9px !important;
+        background: #fffbd6 !important;
+        border: 0 !important;
+        box-shadow: none !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+    }}
+
+    [data-testid="stAlert"] *,
+    [data-testid="stAlert"] p,
+    [data-testid="stAlert"] span {{
+        opacity: 1 !important;
+        visibility: visible !important;
+        color: #9a6700 !important;
+        -webkit-text-fill-color: #9a6700 !important;
+    }}
+
+    /* Analysis status card becomes a vertical layout */
     .status-card {{
         padding: 18px 14px !important;
         border-radius: 15px !important;
@@ -1385,99 +1442,86 @@ div[data-testid="stButton"] button:not([aria-label="Switch theme"]):hover {{
 
     .status-content {{
         display: flex !important;
-        flex-direction: row !important;
+        flex-direction: column !important;
         align-items: center !important;
-        text-align: left !important;
-        gap: 12px !important;
+        text-align: center !important;
+        gap: 16px !important;
     }}
 
     .ai-orb {{
-        width: 64px !important;
-        height: 64px !important;
-        min-width: 64px !important;
+        width: 68px !important;
+        height: 68px !important;
+        min-width: 68px !important;
     }}
 
     .robot {{
-        font-size: 25px !important;
+        font-size: 26px !important;
     }}
 
     .status-info {{
-        width: auto !important;
+        width: 100% !important;
         min-width: 0 !important;
-        flex: 1 1 auto !important;
     }}
 
     .status-title {{
-        font-size: 17px !important;
-        line-height: 1.3 !important;
+        font-size: 18px !important;
+        line-height: 1.35 !important;
     }}
 
     .status-sub {{
-        font-size: 12px !important;
-        line-height: 1.45 !important;
+        font-size: 13px !important;
+        line-height: 1.55 !important;
     }}
 
     .badges {{
-        width: auto !important;
-        justify-content: flex-start !important;
+        width: 100% !important;
+        justify-content: center !important;
         flex-wrap: wrap !important;
     }}
 
     .badge-small {{
-        font-size: 9px !important;
-        padding: 5px 7px !important;
+        font-size: 10px !important;
+        padding: 6px 9px !important;
     }}
 
     .progress-row {{
         width: 100% !important;
-        gap: 8px !important;
+        gap: 10px !important;
     }}
 
     .progress-number {{
-        font-size: 17px !important;
-        min-width: 38px !important;
+        font-size: 18px !important;
+        min-width: 42px !important;
     }}
 
-    /* Keep the decorative radar, scaled down */
+    /* Hide the decorative radar on phones */
     .radar {{
-        display: block !important;
-        width: 78px !important;
-        height: 78px !important;
-        flex: 0 0 78px !important;
+        display: none !important;
     }}
 
-    .r1 {{ width: 34px !important; height: 34px !important; }}
-    .r2 {{ width: 54px !important; height: 54px !important; }}
-    .r3 {{ width: 72px !important; height: 72px !important; }}
-    .radar-scan {{ width: 42px !important; height: 42px !important; }}
-
-    /* Keep all five agents in the same desktop-style row.
-       Horizontal scrolling prevents overlap on narrow phones. */
+    /* IMPORTANT: the five-agent desktop flex row was
+       overflowing on mobile. Use a 2-column grid. */
     .pipeline {{
         padding: 18px 10px !important;
         border-radius: 15px !important;
-        overflow-x: auto !important;
-        overflow-y: hidden !important;
-        -webkit-overflow-scrolling: touch !important;
+        overflow: hidden !important;
     }}
 
     .pipeline-row {{
-        display: flex !important;
-        flex-wrap: nowrap !important;
-        justify-content: space-between !important;
-        gap: 12px !important;
-        min-width: 620px !important;
+        display: grid !important;
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+        gap: 22px 8px !important;
+        align-items: start !important;
     }}
 
     .pipeline-line,
     .energy-line {{
-        display: block !important;
+        display: none !important;
     }}
 
     .agent {{
-        flex: 0 0 112px !important;
-        width: 112px !important;
-        min-width: 112px !important;
+        width: 100% !important;
+        min-width: 0 !important;
     }}
 
     .agent-circle {{
@@ -1488,9 +1532,9 @@ div[data-testid="stButton"] button:not([aria-label="Switch theme"]):hover {{
 
     .agent-name {{
         margin-top: 9px !important;
-        font-size: 11px !important;
+        font-size: 12px !important;
         line-height: 1.35 !important;
-        overflow-wrap: normal !important;
+        overflow-wrap: anywhere !important;
     }}
 
     .agent-status {{
@@ -1533,6 +1577,145 @@ div[data-testid="stButton"] button:not([aria-label="Switch theme"]):hover {{
     }}
 }}
 
+
+/* =========================================================
+   MOBILE HEADER / TOOLBAR — FIXED LIKE DESKTOP
+   Keep Streamlit's header area fixed at the top while the
+   actual application content scrolls underneath it.
+   This matches the desktop behavior and prevents the
+   Share/Star/Edit/GitHub controls from sitting over content.
+   ========================================================= */
+
+@media (max-width: 768px) {{
+
+    /* Full-screen mobile sidebar: it must cover the app header too. */
+    section[data-testid="stSidebar"] {{
+        position: fixed !important;
+        top: 0 !important;
+        bottom: 0 !important;
+        left: 0 !important;
+        right: auto !important;
+        height: 100vh !important;
+        height: 100dvh !important;
+        max-height: none !important;
+        min-height: 100vh !important;
+        min-height: 100dvh !important;
+        width: min(78vw, 580px) !important;
+        max-width: min(78vw, 580px) !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        z-index: 1000001 !important;
+        overflow: hidden !important;
+    }}
+
+    section[data-testid="stSidebar"] > div {{
+        height: 100% !important;
+        max-height: none !important;
+        padding-top: 25px !important;
+        overflow-y: auto !important;
+        overflow-x: hidden !important;
+        box-sizing: border-box !important;
+    }}
+
+    /* Sidebar open/close controls must remain above the sidebar itself. */
+    button[data-testid="stSidebarCollapseButton"],
+    [data-testid="stSidebarCollapsedControl"],
+    [data-testid="stSidebarCollapsedControl"] button {{
+        z-index: 1000002 !important;
+    }}
+
+    header[data-testid="stHeader"] {{
+        position: fixed !important;
+        top: 0 !important;
+        right: 0 !important;
+        bottom: auto !important;
+        left: 0 !important;
+        width: 100% !important;
+        height: 2.75rem !important;
+        min-height: 2.75rem !important;
+        max-height: 2.75rem !important;
+
+        margin: 0 !important;
+        padding: 0 !important;
+        transform: none !important;
+        overflow: visible !important;
+
+        background: {BG} !important;
+        z-index: 999990 !important;
+    }}
+
+    /*
+       Keep the toolbar inside the fixed header.
+       Do NOT make its children fixed independently.
+    */
+    header[data-testid="stHeader"] [data-testid="stToolbar"],
+    header[data-testid="stHeader"] .stAppToolbar,
+    header[data-testid="stHeader"] > div,
+    header[data-testid="stHeader"] [class*="toolbar"] {{
+        position: relative !important;
+        top: auto !important;
+        right: auto !important;
+        bottom: auto !important;
+        left: auto !important;
+        inset: auto !important;
+
+        width: 100% !important;
+        height: 2.75rem !important;
+        min-height: 2.75rem !important;
+        max-height: 2.75rem !important;
+
+        margin: 0 !important;
+        padding: 0 !important;
+        transform: none !important;
+        overflow: visible !important;
+        box-sizing: border-box !important;
+    }}
+
+    header[data-testid="stHeader"] [data-testid="stToolbar"] > div,
+    header[data-testid="stHeader"] .stAppToolbar > div {{
+        position: relative !important;
+        top: auto !important;
+        right: auto !important;
+        bottom: auto !important;
+        left: auto !important;
+        inset: auto !important;
+
+        width: 100% !important;
+        height: 2.75rem !important;
+        min-height: 2.75rem !important;
+
+        margin: 0 !important;
+        padding: 0 !important;
+        transform: none !important;
+    }}
+
+    /*
+       Reserve exactly the fixed-header height.
+       This is the important part: page content starts below
+       the toolbar instead of being hidden behind it.
+    */
+    [data-testid="stAppViewContainer"] {{
+        margin-top: 0 !important;
+        padding-top: 2.75rem !important;
+    }}
+
+    [data-testid="stAppViewBlockContainer"] {{
+        padding-top: 0 !important;
+        margin-top: 0 !important;
+    }}
+
+    /*
+       Sidebar buttons stay above the fixed header and remain
+       clickable in both expanded and collapsed states.
+    */
+    button[data-testid="stSidebarCollapseButton"],
+    [data-testid="stSidebarCollapsedControl"],
+    [data-testid="stSidebarCollapsedControl"] button {{
+        position: fixed !important;
+        z-index: 1000000 !important;
+    }}
+}}
+
 /* Extra-small phones */
 @media (max-width: 480px) {{
 
@@ -1559,8 +1742,7 @@ div[data-testid="stButton"] button:not([aria-label="Switch theme"]):hover {{
     }}
 
     .pipeline-row {{
-        gap: 12px !important;
-        min-width: 620px !important;
+        gap: 20px 5px !important;
     }}
 
     .agent-circle {{
@@ -1583,8 +1765,8 @@ div[data-testid="stButton"] button:not([aria-label="Switch theme"]):hover {{
     }}
 
     .badge-small {{
-        width: auto !important;
-        text-align: left !important;
+        width: 100% !important;
+        text-align: center !important;
     }}
 }}
 
@@ -1830,6 +2012,63 @@ st.html(
 )
 
 # =========================================================
+
+# =========================================================
+# BACKGROUND ANALYSIS JOB
+# =========================================================
+
+def _run_business_analysis_background(business_idea, job):
+    """Run RAG + LangGraph without tying it to Streamlit reruns."""
+    try:
+        from rag.retriever import get_vector_store
+        from graph.workflow import business_analyst_workflow
+
+        job["status"] = "loading_knowledge"
+        get_vector_store()
+
+        initial_state = {
+            "business_idea": business_idea,
+            "market_research": None,
+            "competitor_analysis": None,
+            "financial_plan": None,
+            "risk_analysis": None,
+            "marketing_strategy": None,
+            "final_report": None,
+            "current_step": "starting",
+            "error": None,
+        }
+
+        job["status"] = "running_workflow"
+        result = business_analyst_workflow.invoke(initial_state)
+
+        if result.get("error"):
+            raise RuntimeError(result["error"])
+
+        job["result"] = result
+        job["status"] = "completed"
+
+    except Exception as exc:
+        job["error"] = str(exc)
+        job["status"] = "error"
+
+
+def _start_business_analysis_background(business_idea):
+    job = {
+        "status": "starting",
+        "result": None,
+        "error": None,
+    }
+
+    worker = threading.Thread(
+        target=_run_business_analysis_background,
+        args=(business_idea, job),
+        daemon=True,
+    )
+    job["thread"] = worker
+    worker.start()
+    return job
+
+
 # BUSINESS INPUT
 # =========================================================
 
@@ -1891,21 +2130,20 @@ if generate:
         st.session_state.running = True
         st.session_state.completed = False
         st.session_state.active_agent = 0
+        st.session_state.analysis_step = 0
         st.session_state.progress = 0
+        st.session_state.analysis_job_idea = idea
+        st.session_state.analysis_job_error = None
+
+        # Start the real workflow exactly once.
+        if st.session_state.analysis_job is None:
+            st.session_state.analysis_job = _start_business_analysis_background(idea)
 
         st.rerun()
 
 # =========================================================
 # ANALYSIS ANIMATION
 # =========================================================
-
-agents = [
-    ("📈", "Market research"),
-    ("♧", "Competitor analysis"),
-    ("▣", "Financial planning"),
-    ("⚠", "Risk assessment"),
-    ("📣", "Marketing strategy")
-]
 
 if st.session_state.running:
 
@@ -1914,203 +2152,173 @@ if st.session_state.running:
     status_placeholder = st.empty()
 
     total_agents = len(agents)
+    job = st.session_state.analysis_job
 
-    for i, (icon, name) in enumerate(agents):
+    # Theme changes rerun Streamlit, but the background job survives.
+    current_step = int(st.session_state.get("analysis_step", 0))
+    current_step = min(max(current_step, 0), total_agents - 1)
 
-        st.session_state.active_agent = i
-
-        # -------------------------------------------------
-        # STATUS
-        # -------------------------------------------------
-
-        progress_value = int((i / total_agents) * 100)
-
-        if i == 0:
-            message = "Analyzing market size, demand, and growth potential..."
-        elif i == 1:
-            message = "Studying competitors and finding market gaps..."
-        elif i == 2:
-            message = "Building revenue, cost, and financial projections..."
-        elif i == 3:
-            message = "Evaluating risks, challenges, and mitigation..."
-        else:
-            message = "Creating the final marketing strategy..."
-
-        # -------------------------------------------------
-        # STATUS CARD
-        # -------------------------------------------------
-
-        status_placeholder.html(
-            textwrap.dedent(f"""
-            <div class="status-card">
-
-                <div class="status-content">
-
-                    <div class="ai-orb">
-                        <div class="robot">🤖</div>
-                    </div>
-
-                    <div class="status-info">
-
-                        <div class="status-title">
-                            Your analyst team is working
-                            <span class="dot"></span>
-                        </div>
-
-                        <div class="status-sub">
-                            {message}
-                        </div>
-
-                        <div class="badges">
-
-                            <div class="badge-small">
-                                ◷ Usually takes 1–2 minutes
-                            </div>
-
-                            <div class="badge-small">
-                                ✦ Live analysis in progress
-                            </div>
-
-                        </div>
-
-                        <div class="progress-row">
-
-                            <div class="progress-track">
-
-                                <div
-                                    class="progress-fill"
-                                    style="width:{max(progress_value,8)}%;">
-                                </div>
-
-                            </div>
-
-                            <div class="progress-number">
-                                {max(progress_value,8)}%
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                    <div class="radar">
-
-                        <div class="radar-circle r1"></div>
-                        <div class="radar-circle r2"></div>
-                        <div class="radar-circle r3"></div>
-
-                        <div class="radar-scan"></div>
-
-                    </div>
-
-                </div>
-
-            </div>
-            """),
-        )
-
-        # -------------------------------------------------
-        # PIPELINE
-        # -------------------------------------------------
-
-        pipeline_html = """
-        <div class="pipeline">
-
-            <div class="pipeline-row">
-
-                <div class="pipeline-line"></div>
-        """
-
-        for j, (agent_icon, agent_name) in enumerate(agents):
-
-            if j < i:
-                cls = "agent completed"
-                status = "Completed"
-                time_text = "✓ Done"
-
-            elif j == i:
-                cls = "agent active"
-                status = "In progress"
-                time_text = f"00:{random.randint(20,59):02d}"
-
-            else:
-                cls = "agent"
-                status = "Pending"
-                time_text = "Est. 00:30"
-
-            pipeline_html += f"""
-                <div class="{cls}">
-
-                    <div class="agent-circle">
-                        {agent_icon}
-                    </div>
-
-                    <div class="agent-name">
-                        {j + 1}. {agent_name}
-                    </div>
-
-                    <div class="agent-status">
-                        {status}
-                    </div>
-
-                    <div class="agent-time">
-                        ◷ {time_text}
-                    </div>
-
-                </div>
-            """
-
-        pipeline_html += """
-            </div>
-        </div>
-        """
-
-        pipeline_placeholder.html(textwrap.dedent(pipeline_html))
-
-        # -------------------------------------------------
-        # ANIMATION DELAY
-        # -------------------------------------------------
-
-        time.sleep(1.5)
-
-    # =====================================================
-    # COMPLETED
-    # =====================================================
-
-    # Run the real RAG + LangGraph pipeline after the visual progress phase.
-    try:
-        from rag.retriever import get_vector_store
-        from graph.workflow import business_analyst_workflow
-
-        get_vector_store()
-        initial_state = {
-            "business_idea": idea,
-            "market_research": None,
-            "competitor_analysis": None,
-            "financial_plan": None,
-            "risk_analysis": None,
-            "marketing_strategy": None,
-            "final_report": None,
-            "current_step": "starting",
-            "error": None,
-        }
-        analysis_result = business_analyst_workflow.invoke(initial_state)
-        if analysis_result.get("error"):
-            raise RuntimeError(analysis_result["error"])
-        st.session_state.analysis_result = analysis_result
-        st.session_state.analysis_idea = idea
-    except Exception as exc:
+    if job is not None and job.get("status") == "error":
         st.session_state.running = False
-        st.error(f"Could not generate the business plan: {exc}")
+        st.session_state.analysis_job_error = job.get("error")
+        st.error(
+            f"Could not generate the business plan: {job.get('error')}"
+        )
         st.stop()
 
-    st.session_state.running = False
-    st.session_state.completed = True
-    st.session_state.active_agent = 4
-    st.session_state.progress = 100
+    if job is not None and job.get("status") == "completed":
+        # The actual workflow is finished; do not run it again.
+        st.session_state.analysis_result = job.get("result")
+        st.session_state.analysis_idea = st.session_state.analysis_job_idea
+        st.session_state.running = False
+        st.session_state.completed = True
+        st.session_state.active_agent = total_agents - 1
+        st.session_state.analysis_step = total_agents
+        st.session_state.progress = 100
+        st.session_state.analysis_job = None
+        st.rerun()
 
+    st.session_state.active_agent = current_step
+
+    if current_step == 0:
+        message = "Analyzing market size, demand, and growth potential..."
+    elif current_step == 1:
+        message = "Studying competitors and finding market gaps..."
+    elif current_step == 2:
+        message = "Building revenue, cost, and financial projections..."
+    elif current_step == 3:
+        message = "Evaluating risks, challenges, and mitigation..."
+    else:
+        message = "Creating the final marketing strategy..."
+
+    progress_value = int((current_step / total_agents) * 100)
+
+    status_placeholder.html(
+        textwrap.dedent(f"""
+        <div class="status-card">
+            <div class="status-content">
+
+                <div class="ai-orb">
+                    <div class="robot">🤖</div>
+                </div>
+
+                <div class="status-info">
+
+                    <div class="status-title">
+                        Your analyst team is working
+                        <span class="dot"></span>
+                    </div>
+
+                    <div class="status-sub">
+                        {message}
+                    </div>
+
+                    <div class="badges">
+                        <div class="badge-small">
+                            ◷ Usually takes 1–2 minutes
+                        </div>
+
+                        <div class="badge-small">
+                            ✦ Live analysis in progress
+                        </div>
+                    </div>
+
+                    <div class="progress-row">
+
+                        <div class="progress-track">
+                            <div
+                                class="progress-fill"
+                                style="width:{max(progress_value,8)}%;">
+                            </div>
+                        </div>
+
+                        <div class="progress-number">
+                            {max(progress_value,8)}%
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="radar">
+                    <div class="radar-circle r1"></div>
+                    <div class="radar-circle r2"></div>
+                    <div class="radar-circle r3"></div>
+                    <div class="radar-scan"></div>
+                </div>
+
+            </div>
+        </div>
+        """),
+    )
+
+    pipeline_html = """
+    <div class="pipeline">
+        <div class="pipeline-row">
+            <div class="pipeline-line"></div>
+    """
+
+    for j, (agent_icon, agent_name) in enumerate(agents):
+
+        if j < current_step:
+            cls = "agent completed"
+            status = "Completed"
+            time_text = "✓ Done"
+
+        elif j == current_step:
+            cls = "agent active"
+            status = "In progress"
+            time_text = f"00:{random.randint(20,59):02d}"
+
+        else:
+            cls = "agent"
+            status = "Pending"
+            time_text = "Est. 00:30"
+
+        pipeline_html += f"""
+            <div class="{cls}">
+
+                <div class="agent-circle">
+                    {agent_icon}
+                </div>
+
+                <div class="agent-name">
+                    {j + 1}. {agent_name}
+                </div>
+
+                <div class="agent-status">
+                    {status}
+                </div>
+
+                <div class="agent-time">
+                    ◷ {time_text}
+                </div>
+
+            </div>
+        """
+
+    pipeline_html += """
+        </div>
+    </div>
+    """
+
+    pipeline_placeholder.html(textwrap.dedent(pipeline_html))
+
+    # Advance only the visual state. The real workflow remains in the
+    # background and is never restarted by a theme-triggered rerun.
+    if job is not None and job.get("status") in {
+        "starting",
+        "loading_knowledge",
+        "running_workflow",
+    }:
+        st.session_state.analysis_step = min(
+            total_agents - 1,
+            current_step + 1
+        )
+
+    time.sleep(0.4)
     st.rerun()
 
-# =========================================================
 # COMPLETED STATE
 # =========================================================
 
