@@ -1572,37 +1572,53 @@ div[data-testid="stButton"] button:not([aria-label="Switch theme"]):hover {{
 
 @media (max-width: 768px) {{
 
+    /* On phones Streamlit can re-apply a viewport-fixed header.
+       Make the header belong to the page instead, so its toolbar
+       scrolls away with the document and can never sit over the hero. */
     header[data-testid="stHeader"] {{
-        position: relative !important;
-        top: auto !important;
+        position: absolute !important;
+        top: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
         bottom: auto !important;
-        left: auto !important;
-        right: auto !important;
-        inset: auto !important;
+        inset: 0 0 auto 0 !important;
         width: 100% !important;
-        height: auto !important;
+        height: 0 !important;
         min-height: 0 !important;
         max-height: none !important;
+        margin: 0 !important;
+        padding: 0 !important;
         transform: none !important;
         overflow: visible !important;
-        z-index: 10 !important;
+        background: transparent !important;
+        z-index: 20 !important;
     }}
 
-    /* Streamlit toolbar must not become a fixed/sticky overlay. */
+    /* Force every known Streamlit toolbar wrapper out of fixed/sticky
+       positioning on mobile. */
     header[data-testid="stHeader"] [data-testid="stToolbar"],
     header[data-testid="stHeader"] .stAppToolbar,
-    header[data-testid="stHeader"] > div {{
-        position: relative !important;
-        top: auto !important;
-        bottom: auto !important;
+    header[data-testid="stHeader"] [data-testid="stToolbarActions"],
+    header[data-testid="stHeader"] [data-testid="stToolbarActions"] > div {{
+        position: absolute !important;
+        top: 0 !important;
+        right: 0 !important;
         left: auto !important;
-        right: auto !important;
-        inset: auto !important;
-        width: auto !important;
+        bottom: auto !important;
+        inset: 0 0 auto auto !important;
         transform: none !important;
+        width: auto !important;
+        height: auto !important;
+        margin: 0 !important;
     }}
 
-    /* Keep the sidebar controls above the page and clickable. */
+    /* Never let the toolbar itself capture the page's scrolling layer. */
+    header[data-testid="stHeader"] [data-testid="stToolbar"] {{
+        pointer-events: auto !important;
+    }}
+
+    /* Sidebar controls intentionally remain fixed so the sidebar can
+       always be opened/closed, including after scrolling on mobile. */
     button[data-testid="stSidebarCollapseButton"],
     [data-testid="stSidebarCollapsedControl"],
     [data-testid="stSidebarCollapsedControl"] button {{
