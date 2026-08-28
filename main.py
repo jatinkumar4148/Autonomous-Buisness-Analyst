@@ -1298,263 +1298,263 @@ div[data-testid="stButton"] button:not([aria-label="Switch theme"]):hover {{
    to tablets and phones.
    ========================================================= */
 
-@media (max-width: 768px) {
+@media (max-width: 768px) {{
 
     /* Main page spacing */
-    .main .block-container {
+    .main .block-container {{
         max-width: 100% !important;
         padding: 8px 14px 40px !important;
-    }
+    }}
 
     /* Keep the hero clean on small screens */
-    .hero {
+    .hero {{
         min-height: auto !important;
         padding: 4px 2px 8px !important;
-    }
+    }}
 
-    .hero-title {
+    .hero-title {{
         font-size: clamp(34px, 10vw, 48px) !important;
         line-height: 1.04 !important;
         letter-spacing: -1.8px !important;
         max-width: 100% !important;
-    }
+    }}
 
-    .hero-desc {
+    .hero-desc {{
         font-size: 14px !important;
         line-height: 1.6 !important;
         max-width: 100% !important;
         margin-top: 14px !important;
-    }
+    }}
 
     /* Decorative desktop chart is hidden instead of
        squeezing/overlapping the hero content */
-    .graph-box {
+    .graph-box {{
         display: none !important;
-    }
+    }}
 
     /* Business idea card */
-    .workspace {
+    .workspace {{
         padding: 14px !important;
         margin-top: 8px !important;
         border-radius: 14px !important;
-    }
+    }}
 
-    .workspace-title {
+    .workspace-title {{
         font-size: 15px !important;
         gap: 9px !important;
         margin-bottom: 10px !important;
-    }
+    }}
 
-    textarea {
+    textarea {{
         min-height: 105px !important;
         font-size: 15px !important;
-    }
+    }}
 
-    .generate-wrap {
+    .generate-wrap {{
         margin-top: 12px !important;
-    }
+    }}
 
-    .generate-wrap button {
+    .generate-wrap button {{
         height: 50px !important;
         font-size: 14px !important;
-    }
+    }}
 
     /* Analysis status card becomes a vertical layout */
-    .status-card {
+    .status-card {{
         padding: 18px 14px !important;
         border-radius: 15px !important;
-    }
+    }}
 
-    .status-content {
+    .status-content {{
         display: flex !important;
         flex-direction: column !important;
         align-items: center !important;
         text-align: center !important;
         gap: 16px !important;
-    }
+    }}
 
-    .ai-orb {
+    .ai-orb {{
         width: 68px !important;
         height: 68px !important;
         min-width: 68px !important;
-    }
+    }}
 
-    .robot {
+    .robot {{
         font-size: 26px !important;
-    }
+    }}
 
-    .status-info {
+    .status-info {{
         width: 100% !important;
         min-width: 0 !important;
-    }
+    }}
 
-    .status-title {
+    .status-title {{
         font-size: 18px !important;
         line-height: 1.35 !important;
-    }
+    }}
 
-    .status-sub {
+    .status-sub {{
         font-size: 13px !important;
         line-height: 1.55 !important;
-    }
+    }}
 
-    .badges {
+    .badges {{
         width: 100% !important;
         justify-content: center !important;
         flex-wrap: wrap !important;
-    }
+    }}
 
-    .badge-small {
+    .badge-small {{
         font-size: 10px !important;
         padding: 6px 9px !important;
-    }
+    }}
 
-    .progress-row {
+    .progress-row {{
         width: 100% !important;
         gap: 10px !important;
-    }
+    }}
 
-    .progress-number {
+    .progress-number {{
         font-size: 18px !important;
         min-width: 42px !important;
-    }
+    }}
 
     /* Hide the decorative radar on phones */
-    .radar {
+    .radar {{
         display: none !important;
-    }
+    }}
 
     /* IMPORTANT: the five-agent desktop flex row was
        overflowing on mobile. Use a 2-column grid. */
-    .pipeline {
+    .pipeline {{
         padding: 18px 10px !important;
         border-radius: 15px !important;
         overflow: hidden !important;
-    }
+    }}
 
-    .pipeline-row {
+    .pipeline-row {{
         display: grid !important;
         grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
         gap: 22px 8px !important;
         align-items: start !important;
-    }
+    }}
 
     .pipeline-line,
-    .energy-line {
+    .energy-line {{
         display: none !important;
-    }
+    }}
 
-    .agent {
+    .agent {{
         width: 100% !important;
         min-width: 0 !important;
-    }
+    }}
 
-    .agent-circle {
+    .agent-circle {{
         width: 58px !important;
         height: 58px !important;
         font-size: 24px !important;
-    }
+    }}
 
-    .agent-name {
+    .agent-name {{
         margin-top: 9px !important;
         font-size: 12px !important;
         line-height: 1.35 !important;
         overflow-wrap: anywhere !important;
-    }
+    }}
 
-    .agent-status {
+    .agent-status {{
         margin-top: 6px !important;
         padding: 4px 8px !important;
         font-size: 9px !important;
-    }
+    }}
 
-    .agent-time {
+    .agent-time {{
         margin-top: 6px !important;
         font-size: 9px !important;
-    }
+    }}
 
     /* Final result card */
-    .final-card {
+    .final-card {{
         padding: 18px 14px !important;
         min-height: auto !important;
         border-radius: 15px !important;
-    }
+    }}
 
-    .final-content {
+    .final-content {{
         flex-direction: column !important;
         text-align: center !important;
         gap: 12px !important;
-    }
+    }}
 
-    .final-title {
+    .final-title {{
         font-size: 17px !important;
-    }
+    }}
 
-    .final-sub {
+    .final-sub {{
         font-size: 12px !important;
         line-height: 1.55 !important;
-    }
+    }}
 
     /* Download/result columns should not create narrow
        desktop-style spacing on mobile */
-    [data-testid="column"] {
+    [data-testid="column"] {{
         min-width: 0 !important;
-    }
-}
+    }}
+}}
 
 /* Extra-small phones */
-@media (max-width: 480px) {
+@media (max-width: 480px) {{
 
-    .main .block-container {
+    .main .block-container {{
         padding-left: 10px !important;
         padding-right: 10px !important;
-    }
+    }}
 
-    .hero-title {
+    .hero-title {{
         font-size: 35px !important;
         letter-spacing: -1.5px !important;
-    }
+    }}
 
-    .hero-desc {
+    .hero-desc {{
         font-size: 13px !important;
-    }
+    }}
 
-    .workspace {
+    .workspace {{
         padding: 12px !important;
-    }
+    }}
 
-    .pipeline {
+    .pipeline {{
         padding: 16px 7px !important;
-    }
+    }}
 
-    .pipeline-row {
+    .pipeline-row {{
         gap: 20px 5px !important;
-    }
+    }}
 
-    .agent-circle {
+    .agent-circle {{
         width: 54px !important;
         height: 54px !important;
         font-size: 22px !important;
-    }
+    }}
 
-    .agent-name {
+    .agent-name {{
         font-size: 11px !important;
-    }
+    }}
 
     .agent-status,
-    .agent-time {
+    .agent-time {{
         font-size: 8.5px !important;
-    }
+    }}
 
-    .status-card {
+    .status-card {{
         padding: 16px 11px !important;
-    }
+    }}
 
-    .badge-small {
+    .badge-small {{
         width: 100% !important;
         text-align: center !important;
-    }
-}
+    }}
+}}
 
 </style>
 """,
