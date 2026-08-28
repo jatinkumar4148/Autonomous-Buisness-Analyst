@@ -1372,9 +1372,19 @@ div[data-testid="stButton"] button:not([aria-label="Switch theme"]):hover {{
         line-height: 1.4 !important;
     }}
 
-    [data-testid="stAlert"] * {{
+    [data-testid="stAlert"],
+    [data-testid="stAlert"] *,
+    [data-testid="stAlert"] p,
+    [data-testid="stAlert"] span,
+    [data-testid="stAlert"] div {{
         opacity: 1 !important;
         visibility: visible !important;
+        color: #9a6700 !important;
+        -webkit-text-fill-color: #9a6700 !important;
+    }}
+
+    [data-testid="stAlert"] {{
+        background: #fffbd6 !important;
     }}
 
     /* Analysis status card becomes a vertical layout */
