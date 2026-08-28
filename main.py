@@ -1377,7 +1377,7 @@ div[data-testid="stButton"] button:not([aria-label="Switch theme"]):hover {{
         visibility: visible !important;
     }}
 
-    /* Preserve desktop composition on mobile without overlap */
+    /* Analysis status card becomes a vertical layout */
     .status-card {{
         padding: 18px 14px !important;
         border-radius: 15px !important;
@@ -1385,99 +1385,86 @@ div[data-testid="stButton"] button:not([aria-label="Switch theme"]):hover {{
 
     .status-content {{
         display: flex !important;
-        flex-direction: row !important;
+        flex-direction: column !important;
         align-items: center !important;
-        text-align: left !important;
-        gap: 12px !important;
+        text-align: center !important;
+        gap: 16px !important;
     }}
 
     .ai-orb {{
-        width: 64px !important;
-        height: 64px !important;
-        min-width: 64px !important;
+        width: 68px !important;
+        height: 68px !important;
+        min-width: 68px !important;
     }}
 
     .robot {{
-        font-size: 25px !important;
+        font-size: 26px !important;
     }}
 
     .status-info {{
-        width: auto !important;
+        width: 100% !important;
         min-width: 0 !important;
-        flex: 1 1 auto !important;
     }}
 
     .status-title {{
-        font-size: 17px !important;
-        line-height: 1.3 !important;
+        font-size: 18px !important;
+        line-height: 1.35 !important;
     }}
 
     .status-sub {{
-        font-size: 12px !important;
-        line-height: 1.45 !important;
+        font-size: 13px !important;
+        line-height: 1.55 !important;
     }}
 
     .badges {{
-        width: auto !important;
-        justify-content: flex-start !important;
+        width: 100% !important;
+        justify-content: center !important;
         flex-wrap: wrap !important;
     }}
 
     .badge-small {{
-        font-size: 9px !important;
-        padding: 5px 7px !important;
+        font-size: 10px !important;
+        padding: 6px 9px !important;
     }}
 
     .progress-row {{
         width: 100% !important;
-        gap: 8px !important;
+        gap: 10px !important;
     }}
 
     .progress-number {{
-        font-size: 17px !important;
-        min-width: 38px !important;
+        font-size: 18px !important;
+        min-width: 42px !important;
     }}
 
-    /* Keep the decorative radar, scaled down */
+    /* Hide the decorative radar on phones */
     .radar {{
-        display: block !important;
-        width: 78px !important;
-        height: 78px !important;
-        flex: 0 0 78px !important;
+        display: none !important;
     }}
 
-    .r1 {{ width: 34px !important; height: 34px !important; }}
-    .r2 {{ width: 54px !important; height: 54px !important; }}
-    .r3 {{ width: 72px !important; height: 72px !important; }}
-    .radar-scan {{ width: 42px !important; height: 42px !important; }}
-
-    /* Keep all five agents in the same desktop-style row.
-       Horizontal scrolling prevents overlap on narrow phones. */
+    /* IMPORTANT: the five-agent desktop flex row was
+       overflowing on mobile. Use a 2-column grid. */
     .pipeline {{
         padding: 18px 10px !important;
         border-radius: 15px !important;
-        overflow-x: auto !important;
-        overflow-y: hidden !important;
-        -webkit-overflow-scrolling: touch !important;
+        overflow: hidden !important;
     }}
 
     .pipeline-row {{
-        display: flex !important;
-        flex-wrap: nowrap !important;
-        justify-content: space-between !important;
-        gap: 12px !important;
-        min-width: 620px !important;
+        display: grid !important;
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+        gap: 22px 8px !important;
+        align-items: start !important;
     }}
 
     .pipeline-line,
     .energy-line {{
-        display: block !important;
+        display: none !important;
     }}
 
     .agent {{
-        flex: 0 0 112px !important;
-        width: 112px !important;
-        min-width: 112px !important;
+        width: 100% !important;
+        min-width: 0 !important;
     }}
 
     .agent-circle {{
@@ -1488,9 +1475,9 @@ div[data-testid="stButton"] button:not([aria-label="Switch theme"]):hover {{
 
     .agent-name {{
         margin-top: 9px !important;
-        font-size: 11px !important;
+        font-size: 12px !important;
         line-height: 1.35 !important;
-        overflow-wrap: normal !important;
+        overflow-wrap: anywhere !important;
     }}
 
     .agent-status {{
@@ -1559,8 +1546,7 @@ div[data-testid="stButton"] button:not([aria-label="Switch theme"]):hover {{
     }}
 
     .pipeline-row {{
-        gap: 12px !important;
-        min-width: 620px !important;
+        gap: 20px 5px !important;
     }}
 
     .agent-circle {{
@@ -1583,8 +1569,8 @@ div[data-testid="stButton"] button:not([aria-label="Switch theme"]):hover {{
     }}
 
     .badge-small {{
-        width: auto !important;
-        text-align: left !important;
+        width: 100% !important;
+        text-align: center !important;
     }}
 }}
 
