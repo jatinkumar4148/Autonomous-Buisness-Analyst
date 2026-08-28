@@ -363,16 +363,81 @@ header[data-testid="stHeader"] {{
 }}
 
 /*
-   Hide only the top-right actions.
-   Do NOT hide the complete stToolbar.
+   Keep the top-right actions visible in BOTH light and dark mode.
+   Their color follows the current theme text color.
 */
-header button[aria-label*="Share"],
-header button[aria-label*="Star"],
-header button[aria-label*="Edit"],
-header button[aria-label*="GitHub"],
-header button[aria-label*="Deploy"] {{
-    display: none !important;
-    visibility: hidden !important;
+header[data-testid="stHeader"] button[aria-label*="Share"],
+header[data-testid="stHeader"] button[aria-label*="Star"],
+header[data-testid="stHeader"] button[aria-label*="Edit"],
+header[data-testid="stHeader"] button[aria-label*="GitHub"],
+header[data-testid="stHeader"] button[aria-label*="Deploy"] {{
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    color: {TEXT} !important;
+}}
+
+header[data-testid="stHeader"] button[aria-label*="Share"] svg,
+header[data-testid="stHeader"] button[aria-label*="Star"] svg,
+header[data-testid="stHeader"] button[aria-label*="Edit"] svg,
+header[data-testid="stHeader"] button[aria-label*="GitHub"] svg,
+header[data-testid="stHeader"] button[aria-label*="Deploy"] svg {{
+    color: {TEXT} !important;
+    stroke: {TEXT} !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+}}
+
+header[data-testid="stHeader"] button[aria-label*="Share"] *,
+header[data-testid="stHeader"] button[aria-label*="Star"] *,
+header[data-testid="stHeader"] button[aria-label*="Edit"] *,
+header[data-testid="stHeader"] button[aria-label*="GitHub"] *,
+header[data-testid="stHeader"] button[aria-label*="Deploy"] * {{
+    opacity: 1 !important;
+    visibility: visible !important;
+}}
+
+/* Replace Streamlit's native "Fork" label with "GitHub".
+   The native GitHub control remains clickable. */
+header[data-testid="stHeader"] button[aria-label*="GitHub"],
+header[data-testid="stHeader"] button[aria-label*="Fork"],
+header[data-testid="stHeader"] a[aria-label*="GitHub"],
+header[data-testid="stHeader"] a[aria-label*="Fork"],
+header[data-testid="stHeader"] [title*="GitHub"],
+header[data-testid="stHeader"] [title*="Fork"] {{
+    font-size: 0 !important;
+    color: {TEXT} !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+}}
+
+header[data-testid="stHeader"] button[aria-label*="GitHub"]::after,
+header[data-testid="stHeader"] button[aria-label*="Fork"]::after,
+header[data-testid="stHeader"] a[aria-label*="GitHub"]::after,
+header[data-testid="stHeader"] a[aria-label*="Fork"]::after,
+header[data-testid="stHeader"] [title*="GitHub"]::after,
+header[data-testid="stHeader"] [title*="Fork"]::after {{
+    content: "GitHub" !important;
+    display: inline-block !important;
+    margin-left: 5px !important;
+    font-size: 14px !important;
+    font-weight: 500 !important;
+    line-height: 1 !important;
+    color: {TEXT} !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+}}
+
+header[data-testid="stHeader"] button[aria-label*="GitHub"] svg,
+header[data-testid="stHeader"] button[aria-label*="Fork"] svg,
+header[data-testid="stHeader"] a[aria-label*="GitHub"] svg,
+header[data-testid="stHeader"] a[aria-label*="Fork"] svg,
+header[data-testid="stHeader"] [title*="GitHub"] svg,
+header[data-testid="stHeader"] [title*="Fork"] svg {{
+    color: {TEXT} !important;
+    stroke: {TEXT} !important;
+    opacity: 1 !important;
+    visibility: visible !important;
 }}
 
 /* Hide Streamlit decoration without removing header controls. */
