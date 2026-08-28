@@ -369,115 +369,83 @@ div[data-testid="stDecoration"] {{
     visibility: hidden !important;
 }}
 
-/* =====================================================
-   SIDEBAR TOGGLE — CUSTOM HAMBURGER
-   Uses Streamlit's REAL sidebar buttons so functionality
-   is preserved. The chevron is completely hidden.
-===================================================== */
+/* Keep native sidebar collapse control visible. */
+button[data-testid="stSidebarCollapseButton"] {{
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+    z-index: 999999 !important;
+}}
 
-/* Target both current and alternate Streamlit selectors. */
-button[data-testid="stSidebarCollapseButton"],
-button[aria-label="Collapse sidebar"],
-button[aria-label="Expand sidebar"],
+/* Keep native sidebar open control visible after collapse. */
+[data-testid="stSidebarCollapsedControl"] {{
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+    z-index: 999999 !important;
+}}
+
 [data-testid="stSidebarCollapsedControl"] button {{
     display: flex !important;
     visibility: visible !important;
     opacity: 1 !important;
     pointer-events: auto !important;
-    z-index: 2147483647 !important;
-    width: 34px !important;
-    height: 34px !important;
-    min-width: 34px !important;
-    min-height: 34px !important;
-    max-width: 34px !important;
-    max-height: 34px !important;
-    padding: 0 !important;
-    margin: 0 !important;
-    border: 1px solid rgba(90, 105, 110, .70) !important;
-    border-radius: 7px !important;
-    background: rgba(248, 250, 249, .96) !important;
-    color: #253238 !important;
-    box-shadow: 0 2px 8px rgba(0,0,0,.10) !important;
-    overflow: hidden !important;
-    box-sizing: border-box !important;
+    z-index: 1000000 !important;
 }}
 
-/* Remove Streamlit's original double-chevron SVG. */
+/* =====================================================
+   CUSTOM HAMBURGER SIDEBAR TOGGLE
+   Targets the ACTUAL nested Streamlit <button> (both the
+   open-sidebar collapse button and the closed-sidebar
+   ">>" control button) so native click behaviour is kept.
+   Identical appearance in light + dark mode.
+===================================================== */
+
+button[data-testid="stSidebarCollapseButton"],
+[data-testid="stSidebarCollapsedControl"] button {{
+    position: relative !important;
+    width: 40px !important;
+    height: 40px !important;
+    min-width: 40px !important;
+    min-height: 40px !important;
+    padding: 0 !important;
+    border-radius: 11px !important;
+    background: #000000 !important;
+    border: none !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    box-shadow: 0 4px 14px rgba(0,0,0,.22) !important;
+    transition: transform .25s ease, box-shadow .25s ease !important;
+}}
+
+button[data-testid="stSidebarCollapseButton"]:hover,
+[data-testid="stSidebarCollapsedControl"] button:hover {{
+    transform: scale(1.06) !important;
+    box-shadow: 0 6px 18px rgba(0,0,0,.32) !important;
+}}
+
+/* Hide Streamlit's default arrow / double-chevron icon */
 button[data-testid="stSidebarCollapseButton"] svg,
-button[aria-label="Collapse sidebar"] svg,
-button[aria-label="Expand sidebar"] svg,
 [data-testid="stSidebarCollapsedControl"] button svg {{
     display: none !important;
     visibility: hidden !important;
     opacity: 0 !important;
 }}
 
-/* Draw the requested hamburger icon ourselves. */
+/* Draw a clean hamburger (☰) glyph in place of the icon.
+   It sits inside the real <button>, so clicks on it still
+   fire Streamlit's native sidebar toggle. */
 button[data-testid="stSidebarCollapseButton"]::before,
-button[aria-label="Collapse sidebar"]::before,
-button[aria-label="Expand sidebar"]::before,
 [data-testid="stSidebarCollapsedControl"] button::before {{
-    content: "☰" !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    width: 34px !important;
-    height: 34px !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    font-family: Arial, sans-serif !important;
-    font-size: 17px !important;
-    font-weight: 500 !important;
-    line-height: 34px !important;
-    color: #253238 !important;
-}}
-
-/* Keep the collapsed button in a fixed, always-visible position. */
-[data-testid="stSidebarCollapsedControl"] {{
-    position: fixed !important;
-    top: 12px !important;
-    left: 12px !important;
-    width: 34px !important;
-    height: 34px !important;
-    padding: 0 !important;
-    margin: 0 !important;
-    background: transparent !important;
-    z-index: 2147483647 !important;
-}}
-
-/* Keep the open-state button fixed in the same position. */
-button[data-testid="stSidebarCollapseButton"],
-button[aria-label="Collapse sidebar"] {{
-    position: fixed !important;
-    top: 12px !important;
-    left: 12px !important;
-    z-index: 2147483647 !important;
-}}
-
-/* Hover state — only the toggle changes. */
-button[data-testid="stSidebarCollapseButton"]:hover,
-button[aria-label="Collapse sidebar"]:hover,
-button[aria-label="Expand sidebar"]:hover,
-[data-testid="stSidebarCollapsedControl"] button:hover {{
-    background: rgba(235, 239, 238, 1) !important;
-    border-color: rgba(50, 70, 70, .90) !important;
-}}
-
-/* Dark mode — same square hamburger remains visible. */
-[data-theme="dark"] button[data-testid="stSidebarCollapseButton"],
-[data-theme="dark"] button[aria-label="Collapse sidebar"],
-[data-theme="dark"] button[aria-label="Expand sidebar"],
-[data-theme="dark"] [data-testid="stSidebarCollapsedControl"] button {{
-    background: rgba(18, 28, 27, .98) !important;
-    border-color: rgba(220, 235, 230, .55) !important;
-    color: #f4faf7 !important;
-}}
-
-[data-theme="dark"] button[data-testid="stSidebarCollapseButton"]::before,
-[data-theme="dark"] button[aria-label="Collapse sidebar"]::before,
-[data-theme="dark"] button[aria-label="Expand sidebar"]::before,
-[data-theme="dark"] [data-testid="stSidebarCollapsedControl"] button::before {{
-    color: #f4faf7 !important;
+    content: "\2630";
+    font-family: 'Inter', sans-serif;
+    font-size: 18px;
+    line-height: 1;
+    color: #ffffff !important;
+    pointer-events: none;
 }}
 
 /* Remove extra content spacing without collapsing the header itself. */
